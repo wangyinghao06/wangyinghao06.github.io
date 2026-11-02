@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aivaro · AI 对话工作台</title>
+<meta name="description" content="Aivaro 是一个需要登录的 AI 对话工作台：多模型对话、个人额度与用量对账。当前为受控试运行阶段，公开注册尚未开放，账号由管理员开通。">
+<link rel="stylesheet" href="style.css">
+<script src="nav.js" defer></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">Aivaro<small>AI WORKSPACE</small></a>
+    <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" data-nav-toggle><span></span><span></span><span></span></button>
+    <nav class="site-nav" data-nav>
+      <a href="index.html">首页</a>
+      <a href="models.html">模型</a>
+      <a href="docs.html">接入文档</a>
+      <a href="status.html">服务状态</a>
+      <a href="terms.html">服务条款</a>
+      <a href="privacy.html">隐私政策</a>
+      <a href="contact.html">联系我们</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-ghost" href="status.html">服务状态</a>
+      <a class="btn btn-primary" href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">登录工作台</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="container">
+    <h1>Aivaro · AI 对话工作台</h1>
+    <p class="lead">登录后即可使用多模型 AI 对话：每位用户有独立的账号、个人额度与用量记录，调用按实际结算计量，失败不计费。</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">进入工作台</a>
+      <a class="btn btn-ghost" href="models.html">查看可用模型</a>
+    </div>
+    <div class="notice">
+      <strong>当前状态：受控试运行</strong>
+      工作台目前处于受控试运行阶段，<strong>公开注册与充值尚未开放</strong>，账号由管理员开通，不提供商业可用性与 SLA 承诺。免费模型来自上游免费池，全站共享其每日限额，高峰时可能出现限流。
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="container">
+
+    <section class="block">
+      <h2>产品功能</h2>
+      <p class="intro">以下功能均已在当前线上工作台实际运行并通过验收，不是规划中的能力。</p>
+      <div class="grid">
+        <div class="card">
+          <h3>账号登录与个人额度</h3>
+          <p>每位用户使用独立账号登录，额度和调用令牌互不共享；用户之间无法查看或使用彼此的额度。</p>
+        </div>
+        <div class="card">
+          <h3>多模型切换</h3>
+          <p>在同一个对话界面中切换模型：免费模型适合日常试用，DeepSeek 模型适合更强的推理与生成任务。</p>
+        </div>
+        <div class="card">
+          <h3>用量对账</h3>
+          <p>每次调用都写入请求台账并按上游实际用量结算，调用失败不计入消费；全站设有每日额度上限，防止异常消耗。</p>
+        </div>
+        <div class="card">
+          <h3>稳定性保护</h3>
+          <p>网关设有响应头与总时长超时、登录失败限速与异常急停机制，单次请求异常不会拖垮整体服务。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>当前可用模型</h2>
+      <p class="intro">以下模型已接入工作台，登录后可在模型选择中直接使用。计量与限额说明见<a href="models.html">模型页</a>。</p>
+      <div class="grid">
+        <div class="card">
+          <h3>cohere/north-mini-code:free <span class="badge test">免费 · 默认</span></h3>
+          <p>Cohere North Mini Code · 上下文 256K · 适合通用对话与代码场景 · 来自上游免费池，全站共享每日限额。</p>
+        </div>
+        <div class="card">
+          <h3>deepseek-flash <span class="badge">平台额度计量</span></h3>
+          <p>DeepSeek 快速模型，支持思考模式，适合需要较强推理的对话与生成任务 · 按平台额度计量。</p>
+        </div>
+        <div class="card">
+          <h3>deepseek-flash-none <span class="badge">平台额度计量</span></h3>
+          <p>DeepSeek 快速模型的非思考变体，响应更快、同类任务消耗更低 · 按平台额度计量。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>如何开始使用</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="num">1</span>
+          <h3>开通账号</h3>
+          <p>本站不开放自助注册。试运行账号由管理员开通，可通过<a href="contact.html">联系我们</a>页面提交申请。</p>
+        </div>
+        <div class="step">
+          <span class="num">2</span>
+          <h3>登录工作台</h3>
+          <p>打开<a href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">工作台</a>，使用管理员发放的账号登录。未登录状态下无法发起任何模型调用。</p>
+        </div>
+        <div class="step">
+          <span class="num">3</span>
+          <h3>选择模型并对话</h3>
+          <p>在工作台中选择模型开始对话；你的个人额度与每次调用的用量都会记录，可随时核对。</p>
+        </div>
+      </div>
+      <p style="margin-top:14px"><a href="status.html">查看服务状态 →</a> · <a href="models.html">查看模型与计量说明 →</a></p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <strong>Aivaro</strong>
+      <p>AI 对话工作台 · 当前为受控试运行阶段，运行于免费托管环境，不提供 SLA。</p>
+    </div>
+    <nav class="footer-links">
+      <a href="models.html">模型</a>
+      <a href="docs.html">接入文档</a>
+      <a href="status.html">服务状态</a>
+      <a href="terms.html">服务条款（草案）</a>
+      <a href="privacy.html">隐私政策（草案）</a>
+      <a href="contact.html">联系我们</a>
+    </nav>
+  </div>
+  <div class="container footer-bottom">© 2026 Aivaro · 本站条款与隐私政策为草案，以正式发布版本为准。</div>
+</footer>
+
+</body>
+</html>
