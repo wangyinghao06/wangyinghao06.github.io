@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>小屿 API · AI API 中转服务（测试阶段）</title>
-<meta name="description" content="小屿 API：OpenAI 兼容的 AI API 中转服务。当前为测试阶段，公开注册与充值尚未开放。">
+<title>Aivaro · AI 对话工作台</title>
+<meta name="description" content="Aivaro 是一个需要登录的 AI 对话工作台：多模型对话、个人额度与用量对账。当前为受控试运行阶段，公开注册尚未开放，账号由管理员开通。">
 <link rel="stylesheet" href="style.css">
 <script src="nav.js" defer></script>
 </head>
@@ -12,7 +12,7 @@
 
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="index.html">小屿 API<small>AI API RELAY</small></a>
+    <a class="brand" href="index.html">Aivaro<small>AI WORKSPACE</small></a>
     <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" data-nav-toggle><span></span><span></span><span></span></button>
     <nav class="site-nav" data-nav>
       <a href="index.html">首页</a>
@@ -24,23 +24,23 @@
       <a href="contact.html">联系我们</a>
     </nav>
     <div class="header-actions">
-      <a class="btn btn-ghost" href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">在线体验</a>
-      <a class="btn btn-primary" href="https://3000-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">控制台</a>
+      <a class="btn btn-ghost" href="status.html">服务状态</a>
+      <a class="btn btn-primary" href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">登录工作台</a>
     </div>
   </div>
 </header>
 
 <div class="hero">
   <div class="container">
-    <h1>一个 Key，接入 AI 模型</h1>
-    <p class="lead">小屿 API 提供与 OpenAI 兼容的 API 中转服务：把客户端的 Base URL 换成我们的地址，就可以用自己的 API Key 调用已接入的模型，额度与用量在控制台统一查询。</p>
+    <h1>Aivaro · AI 对话工作台</h1>
+    <p class="lead">登录后即可使用多模型 AI 对话：每位用户有独立的账号、个人额度与用量记录，调用按实际结算计量，失败不计费。</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">在线体验对话演示</a>
-      <a class="btn btn-ghost" href="docs.html">查看接入文档</a>
+      <a class="btn btn-primary" href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">进入工作台</a>
+      <a class="btn btn-ghost" href="models.html">查看可用模型</a>
     </div>
     <div class="notice">
-      <strong>当前状态：测试阶段</strong>
-      本服务目前运行于测试环境，<strong>公开注册与充值尚未开放</strong>，不提供商业可用性与 SLA 承诺。测试 Key 由管理员向少量测试用户发放；正式商用模型与费率将在合规上游确认后另行公布。
+      <strong>当前状态：受控试运行</strong>
+      工作台目前处于受控试运行阶段，<strong>公开注册与充值尚未开放</strong>，账号由管理员开通，不提供商业可用性与 SLA 承诺。免费模型来自上游免费池，全站共享其每日限额，高峰时可能出现限流。
     </div>
   </div>
 </div>
@@ -49,64 +49,67 @@
   <div class="container">
 
     <section class="block">
-      <h2>产品介绍</h2>
-      <p class="intro">小屿 API 是一个轻量的 AI API 网关。客户端按 OpenAI 兼容格式发送请求，网关负责校验你的 API Key、按模型路由到上游、计量 Token 用量并扣减额度，全过程返回标准的状态码与错误信息，方便接入与排障。</p>
+      <h2>产品功能</h2>
+      <p class="intro">以下功能均已在当前线上工作台实际运行并通过验收，不是规划中的能力。</p>
       <div class="grid">
         <div class="card">
-          <h3>OpenAI 兼容接口</h3>
-          <p>请求与响应格式与 OpenAI API 保持一致，现有 SDK 和客户端只需修改 Base URL 与 Key 即可接入。</p>
+          <h3>账号登录与个人额度</h3>
+          <p>每位用户使用独立账号登录，额度和调用令牌互不共享；用户之间无法查看或使用彼此的额度。</p>
         </div>
         <div class="card">
-          <h3>统一额度与用量</h3>
-          <p>每个用户、每个 API Key 独立计量。控制台可查看剩余额度、调用次数与 Token 使用记录，便于核对。</p>
+          <h3>多模型切换</h3>
+          <p>在同一个对话界面中切换模型：免费模型适合日常试用，DeepSeek 模型适合更强的推理与生成任务。</p>
         </div>
         <div class="card">
-          <h3>Key 自主管理</h3>
-          <p>在控制台自行创建、撤销 API Key，可为不同用途设置独立 Key 与额度上限，降低泄露风险。</p>
+          <h3>用量对账</h3>
+          <p>每次调用都写入请求台账并按上游实际用量结算，调用失败不计入消费；全站设有每日额度上限，防止异常消耗。</p>
         </div>
         <div class="card">
-          <h3>规范的错误返回</h3>
-          <p>鉴权失败、额度不足、模型不存在、限流与上游异常都有明确的状态码与说明，排查路径见接入文档。</p>
+          <h3>稳定性保护</h3>
+          <p>网关设有响应头与总时长超时、登录失败限速与异常急停机制，单次请求异常不会拖垮整体服务。</p>
         </div>
       </div>
     </section>
 
     <section class="block">
-      <h2>支持模型概览</h2>
-      <p class="intro">测试阶段仅接入一个免费测试模型，用于验证调用链路、计量与额度逻辑。</p>
+      <h2>当前可用模型</h2>
+      <p class="intro">以下模型已接入工作台，登录后可在模型选择中直接使用。计量与限额说明见<a href="models.html">模型页</a>。</p>
       <div class="grid">
         <div class="card">
-          <h3>cohere/north-mini-code:free <span class="badge test">免费测试</span></h3>
-          <p>Cohere North Mini Code · 上下文 256K · 适合对话与代码场景 · 受上游免费池每日限额约束，测试用户共享额度。</p>
-          <p style="margin-top:10px"><a href="models.html">查看模型与费率说明 →</a></p>
+          <h3>cohere/north-mini-code:free <span class="badge test">免费 · 默认</span></h3>
+          <p>Cohere North Mini Code · 上下文 256K · 适合通用对话与代码场景 · 来自上游免费池，全站共享每日限额。</p>
         </div>
         <div class="card">
-          <h3>正式商用模型 <span class="badge">尚未开放</span></h3>
-          <p>将在合规上游（明确允许商业使用与 API 转供）确认后公布模型清单与费率。在此之前，本站不提供任何付费套餐。</p>
+          <h3>deepseek-flash <span class="badge">平台额度计量</span></h3>
+          <p>DeepSeek 快速模型，支持思考模式，适合需要较强推理的对话与生成任务 · 按平台额度计量。</p>
+        </div>
+        <div class="card">
+          <h3>deepseek-flash-none <span class="badge">平台额度计量</span></h3>
+          <p>DeepSeek 快速模型的非思考变体，响应更快、同类任务消耗更低 · 按平台额度计量。</p>
         </div>
       </div>
     </section>
 
     <section class="block">
-      <h2>快速开始</h2>
+      <h2>如何开始使用</h2>
       <div class="steps">
         <div class="step">
           <span class="num">1</span>
-          <h3>获取测试 Key</h3>
-          <p>公开注册尚未开放。测试 Key 由管理员向测试用户发放；已有测试账号的用户可直接登录控制台创建自己的 API Key。</p>
+          <h3>开通账号</h3>
+          <p>本站不开放自助注册。试运行账号由管理员开通，可通过<a href="contact.html">联系我们</a>页面提交申请。</p>
         </div>
         <div class="step">
           <span class="num">2</span>
-          <h3>配置客户端</h3>
-          <p>把 SDK 或客户端的 Base URL 设置为本站网关地址，API Key 填入你自己的 Key。地址与示例见接入文档。</p>
+          <h3>登录工作台</h3>
+          <p>打开<a href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">工作台</a>，使用管理员发放的账号登录。未登录状态下无法发起任何模型调用。</p>
         </div>
         <div class="step">
           <span class="num">3</span>
-          <h3>发送第一个请求</h3>
-          <p>按文档中的 curl / Python / Node 示例调用 <code>/v1/chat/completions</code>，在控制台核对用量记录。</p>
+          <h3>选择模型并对话</h3>
+          <p>在工作台中选择模型开始对话；你的个人额度与每次调用的用量都会记录，可随时核对。</p>
         </div>
       </div>
-      <p style="margin-top:14px"><a href="docs.html">前往接入文档 →</a> · <a href="status.html">查看服务状态 →</a></p>
+      <p style="margin-top:14px"><a href="status.html">查看服务状态 →</a> · <a href="models.html">查看模型与计量说明 →</a></p>
     </section>
 
   </div>
@@ -115,8 +118,8 @@
 <footer class="site-footer">
   <div class="container footer-inner">
     <div>
-      <strong>小屿 API</strong>
-      <p>AI API 中转服务 · 当前为测试阶段，运行于免费托管环境，不提供 SLA。</p>
+      <strong>Aivaro</strong>
+      <p>AI 对话工作台 · 当前为受控试运行阶段，运行于免费托管环境，不提供 SLA。</p>
     </div>
     <nav class="footer-links">
       <a href="models.html">模型</a>
@@ -127,7 +130,7 @@
       <a href="contact.html">联系我们</a>
     </nav>
   </div>
-  <div class="container footer-bottom">© 2026 小屿 API · 本站条款与隐私政策为草案，以正式发布版本为准。</div>
+  <div class="container footer-bottom">© 2026 Aivaro · 本站条款与隐私政策为草案，以正式发布版本为准。</div>
 </footer>
 
 </body>

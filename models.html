@@ -33,10 +33,10 @@
 <main>
   <div class="container">
     <h1 class="page-title">模型与费率</h1>
-    <p class="page-intro">以下为当前测试阶段实际可用的模型。调用时请使用表中的模型 ID 原样填写 <code>model</code> 参数。</p>
+    <p class="page-intro">以下为当前实际可用的模型。工作台用户登录后在模型选择中直接选用；通过 API 调用时请使用表中的模型 ID 原样填写 <code>model</code> 参数。</p>
 
     <section class="block">
-      <h2>当前可用（测试）</h2>
+      <h2>当前可用</h2>
       <div class="table-wrap">
         <table>
           <thead>
@@ -50,6 +50,20 @@
               <td><span class="badge test">免费测试</span></td>
               <td>测试标定（见下方说明）</td>
             </tr>
+            <tr>
+              <td><code>deepseek-flash</code></td>
+              <td>DeepSeek 快速模型，支持思考模式，适合需要较强推理的对话与生成任务。已在 Aivaro 工作台上线（受控试运行）。</td>
+              <td>—</td>
+              <td><span class="badge">受控试运行</span></td>
+              <td>平台额度计量（非现金标价）</td>
+            </tr>
+            <tr>
+              <td><code>deepseek-flash-none</code></td>
+              <td>DeepSeek 快速模型的非思考变体，响应更快、同类任务消耗更低。已在 Aivaro 工作台上线（受控试运行）。</td>
+              <td>—</td>
+              <td><span class="badge">受控试运行</span></td>
+              <td>平台额度计量（非现金标价）</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -59,10 +73,10 @@
     </section>
 
     <section class="block">
-      <h2>正式商用模型与费率</h2>
+      <h2>开放范围与商用说明</h2>
       <div class="notice">
-        <strong>尚未开放</strong>
-        正式商用模型与费率<strong>将在合规上游确认后公布</strong>：即上游服务条款明确允许商业使用、并允许通过自建 API 网关向客户提供模型服务之后。在此之前，本站不售卖任何套餐、不接受充值，也不会把免费测试额度包装成商业服务。进展会同步更新到本页与<a href="status.html">服务状态页</a>的公告中。
+        <strong>受控试运行，未公开商用</strong>
+        Aivaro 工作台目前为受控试运行：<strong>不开放公开注册、不接受充值、不售卖任何套餐</strong>，账号由管理员开通。DeepSeek 模型已作为工作台内的可用模型接入，按平台额度计量；这不等同于公开商业运营，裸 API 转售不在开放范围内。进展会同步更新到本页与<a href="status.html">服务状态页</a>的公告中。
       </div>
     </section>
 
