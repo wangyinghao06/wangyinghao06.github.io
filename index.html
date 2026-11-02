@@ -1,137 +1,237 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbfaf7">
+<meta name="description" content="Aivaro 是一个 AI 对话工作台：一个账号使用多个模型，额度与调用记录逐笔可查。目前受控试运行，账号由管理员开通。">
 <title>Aivaro · AI 对话工作台</title>
-<meta name="description" content="Aivaro 是一个需要登录的 AI 对话工作台：多模型对话、个人额度与用量对账。当前为受控试运行阶段，公开注册尚未开放，账号由管理员开通。">
-<link rel="stylesheet" href="style.css">
-<script src="nav.js" defer></script>
+<style>
+/* Aivaro 正式首页 — 视觉体系迁移自 prototype v5（设计令牌与组件样式与其 app.css 同源） */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fbfaf7; --panel:#ffffff; --soft:#f3f2ee; --soft2:#eceae5;
+  --line:#e8e6e0; --line2:#dcd9d1;
+  --tx:#1c1c1a; --tx2:#6f6e66; --tx3:#a3a198;
+  --accent:#1c1c1a; --green:#1f9d66; --amber:#b97f16; --red:#c2432f;
+  --serif:Georgia,"Times New Roman","Songti SC","STSong",serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font:15.5px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--tx);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line2)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;color:#55534c}
+:focus-visible{outline:2px solid var(--tx);outline-offset:2px;border-radius:4px}
+
+/* 状态条（v5 演示横幅的位置与样式，文案为真实状态） */
+.status-strip{background:var(--panel);border-bottom:1px solid var(--line);color:var(--tx2);font-size:12px;text-align:center;padding:6px 14px}
+
+/* 顶栏（v5 .topbar / .model-pill / .console-btn） */
+.topbar{display:flex;align-items:center;gap:10px;padding:14px 18px;max-width:1120px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex:0 0 auto}
+.brand-mark{width:26px;height:26px;border-radius:7px;background:var(--tx);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;font-family:var(--serif)}
+.brand-name{font-size:17px;font-weight:650;letter-spacing:.01em}
+.model-pill{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:7px 12px;font-size:14px;min-height:40px;max-width:70vw;box-shadow:0 1px 2px #00000008;text-decoration:none;margin-left:6px}
+.model-pill .mp-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--tx3);flex:0 0 auto}
+.dot.ok{background:var(--green)}
+.tag-free{font-size:11.5px;color:var(--green);font-weight:600;white-space:nowrap}
+.tag-ok{font-size:11.5px;color:var(--green);white-space:nowrap}
+.tag-none{font-size:11.5px;color:var(--tx3);white-space:nowrap}
+.top-right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.top-links{display:flex;gap:16px;font-size:13.5px}
+.top-links a{color:var(--tx2);text-decoration:none}
+.top-links a:hover{color:var(--tx)}
+.console-btn{background:var(--tx);color:#fff;font-size:13.5px;padding:8px 16px;border-radius:10px;min-height:38px;display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap;flex:0 0 auto}
+.icon-btn{width:36px;height:36px;border-radius:9px;display:none;align-items:center;justify-content:center;font-size:16px;color:var(--tx2);background:none;border:0;cursor:pointer;font:inherit}
+.icon-btn:active{background:var(--soft)}
+.mobile-nav{display:none;border-bottom:1px solid var(--line);background:var(--panel);padding:8px 18px 12px}
+.mobile-nav.open{display:block}
+.mobile-nav a{display:block;padding:9px 4px;color:var(--tx2);text-decoration:none;font-size:15px;border-bottom:1px solid var(--soft)}
+.mobile-nav a:last-child{border-bottom:0}
+
+/* 首屏（v5 .welcome / .greeting / .composer / .chips） */
+.welcome{max-width:800px;margin:11vh auto 0;text-align:center;padding:0 18px}
+.greeting{font-family:var(--serif);font-size:37px;font-weight:600;letter-spacing:.01em;color:var(--tx)}
+.w-sub{color:var(--tx2);margin-top:10px;font-size:13.5px}
+.entry-card{max-width:800px;margin:30px auto 0;background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:0 4px 24px #1c1c1a0d,0 1px 3px #1c1c1a08;padding:18px 18px 16px 20px;display:flex;align-items:center;gap:16px;text-align:left;transition:box-shadow .2s,border-color .2s}
+.entry-card:hover{border-color:var(--line2);box-shadow:0 6px 28px #1c1c1a12}
+.entry-main{flex:1;min-width:0}
+.entry-title{font-size:16.5px;font-weight:600}
+.entry-hint{font-size:12.5px;color:var(--tx3);margin-top:2px}
+.entry-btn{background:var(--tx);color:#fff;font-size:14.5px;padding:11px 22px;border-radius:99px;min-height:44px;display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap;flex:0 0 auto}
+.chips{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:18px;flex-wrap:wrap}
+.chip{color:var(--tx3);font-size:13.5px;padding:8px 4px;min-height:40px;text-decoration:none;display:inline-flex;align-items:center}
+.chip:hover{color:var(--tx)}
+.chip-sep{color:var(--line2)}
+
+/* 内容区（v5 .page / .card / .steps / .rules） */
+.page{max-width:820px;margin:0 auto;padding:56px 18px 40px}
+.page h2{font-size:22px;font-weight:650;margin:6px 0 4px}
+.page-sub{color:var(--tx2);font-size:14.5px;margin-bottom:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+.card p{color:var(--tx2);font-size:14.5px}
+.card h3{font-size:16px;margin-bottom:8px}
+.mc-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.fact{font-size:13px;color:var(--tx3);margin-top:8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid2 .card{margin-bottom:0}
+.cards-stack{display:flex;flex-direction:column}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+.step h3{font-size:16px;margin-bottom:8px}
+.step p{color:var(--tx2);font-size:14px}
+.sect{font-size:17px;margin:30px 0 10px}
+.rules{padding-left:20px;color:var(--tx2);font-size:14.5px}
+.rules li{margin-bottom:6px}
+.fine{font-size:12px;color:var(--tx3)}
+
+/* 页脚（v5 .rail-links 语言） */
+footer{border-top:1px solid var(--line);margin-top:20px}
+.foot-in{max-width:820px;margin:0 auto;padding:22px 18px 34px}
+.foot-links{display:flex;gap:14px;font-size:12.5px;flex-wrap:wrap;margin-bottom:10px}
+.foot-links a{color:var(--tx3);text-decoration:none}
+.foot-links a:hover{color:var(--tx)}
+.foot-note{font-size:12px;color:var(--tx3)}
+
+@media (max-width:1023px){
+  .topbar{padding:10px;gap:8px}
+  .brand-name{display:none}
+  .model-pill{flex:1;min-width:0;max-width:none;margin-left:0}
+  .top-links{display:none}
+  .icon-btn{display:inline-flex}
+  .welcome{margin-top:6vh;padding:0 12px}
+  .greeting{font-size:29px}
+  .entry-card{margin-left:12px;margin-right:12px;flex-direction:column;align-items:stretch;text-align:center}
+  .entry-btn{justify-content:center}
+  .steps{grid-template-columns:1fr}
+  .grid2{grid-template-columns:1fr}
+  .page{padding-top:44px}
+}
+</style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="index.html">Aivaro<small>AI WORKSPACE</small></a>
-    <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" data-nav-toggle><span></span><span></span><span></span></button>
-    <nav class="site-nav" data-nav>
-      <a href="index.html">首页</a>
+<div class="status-strip">受控试运行 — 公开注册与充值尚未开放，账号由管理员开通；服务由个人维护，不提供可用性 SLA 承诺。</div>
+
+<header class="topbar">
+  <button class="icon-btn" id="navToggle" aria-label="打开导航菜单" aria-expanded="false" aria-controls="mobileNav">☰</button>
+  <a class="brand" href="index.html" aria-label="Aivaro 首页"><span class="brand-mark">A</span><span class="brand-name">Aivaro</span></a>
+  <a class="model-pill" href="models.html" aria-label="查看可用模型"><span class="dot ok"></span><span class="mp-name">Cohere North Mini Code</span><span class="tag-free">免费</span></a>
+  <div class="top-right">
+    <nav class="top-links" aria-label="主导航">
       <a href="models.html">模型</a>
-      <a href="docs.html">接入文档</a>
-      <a href="status.html">服务状态</a>
-      <a href="terms.html">服务条款</a>
-      <a href="privacy.html">隐私政策</a>
-      <a href="contact.html">联系我们</a>
+      <a href="docs.html">文档</a>
+      <a href="status.html">状态</a>
+      <a href="contact.html">联系</a>
     </nav>
-    <div class="header-actions">
-      <a class="btn btn-ghost" href="status.html">服务状态</a>
-      <a class="btn btn-primary" href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">登录工作台</a>
-    </div>
+    <a class="console-btn" href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech">登录工作台</a>
   </div>
 </header>
-
-<div class="hero">
-  <div class="container">
-    <h1>Aivaro · AI 对话工作台</h1>
-    <p class="lead">登录后即可使用多模型 AI 对话：每位用户有独立的账号、个人额度与用量记录，调用按实际结算计量，失败不计费。</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">进入工作台</a>
-      <a class="btn btn-ghost" href="models.html">查看可用模型</a>
-    </div>
-    <div class="notice">
-      <strong>当前状态：受控试运行</strong>
-      工作台目前处于受控试运行阶段，<strong>公开注册与充值尚未开放</strong>，账号由管理员开通，不提供商业可用性与 SLA 承诺。免费模型来自上游免费池，全站共享其每日限额，高峰时可能出现限流。
-    </div>
-  </div>
-</div>
+<nav class="mobile-nav" id="mobileNav" aria-label="移动端导航">
+  <a href="models.html">模型</a>
+  <a href="docs.html">文档</a>
+  <a href="status.html">状态</a>
+  <a href="contact.html">联系</a>
+  <a href="privacy.html">隐私说明</a>
+  <a href="terms.html">使用条款</a>
+</nav>
 
 <main>
-  <div class="container">
-
-    <section class="block">
-      <h2>产品功能</h2>
-      <p class="intro">以下功能均已在当前线上工作台实际运行并通过验收，不是规划中的能力。</p>
-      <div class="grid">
-        <div class="card">
-          <h3>账号登录与个人额度</h3>
-          <p>每位用户使用独立账号登录，额度和调用令牌互不共享；用户之间无法查看或使用彼此的额度。</p>
-        </div>
-        <div class="card">
-          <h3>多模型切换</h3>
-          <p>在同一个对话界面中切换模型：免费模型适合日常试用，DeepSeek 模型适合更强的推理与生成任务。</p>
-        </div>
-        <div class="card">
-          <h3>用量对账</h3>
-          <p>每次调用都写入请求台账并按上游实际用量结算，调用失败不计入消费；全站设有每日额度上限，防止异常消耗。</p>
-        </div>
-        <div class="card">
-          <h3>稳定性保护</h3>
-          <p>网关设有响应头与总时长超时、登录失败限速与异常急停机制，单次请求异常不会拖垮整体服务。</p>
-        </div>
+  <section class="welcome">
+    <h1 class="greeting">你好，我是 Aivaro</h1>
+    <p class="w-sub">当前默认模型 Cohere North Mini Code · 免费测试 · 每次调用按实际结算，失败不计费</p>
+    <div class="entry-card">
+      <div class="entry-main">
+        <div class="entry-title">登录后即可开始对话</div>
+        <div class="entry-hint">工作台提供多模型对话、个人额度与逐笔用量对账 · 受控试运行，账号由管理员开通</div>
       </div>
-    </section>
+      <a class="entry-btn" href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech">进入工作台</a>
+    </div>
+    <div class="chips">
+      <a class="chip" href="models.html">查看可用模型</a>
+      <span class="chip-sep">·</span>
+      <a class="chip" href="status.html">服务状态</a>
+      <span class="chip-sep">·</span>
+      <a class="chip" href="#start">如何开通账号</a>
+      <span class="chip-sep">·</span>
+      <a class="chip" href="docs.html">接入文档</a>
+    </div>
+  </section>
 
-    <section class="block">
-      <h2>当前可用模型</h2>
-      <p class="intro">以下模型已接入工作台，登录后可在模型选择中直接使用。计量与限额说明见<a href="models.html">模型页</a>。</p>
-      <div class="grid">
-        <div class="card">
-          <h3>cohere/north-mini-code:free <span class="badge test">免费 · 默认</span></h3>
-          <p>Cohere North Mini Code · 上下文 256K · 适合通用对话与代码场景 · 来自上游免费池，全站共享每日限额。</p>
-        </div>
-        <div class="card">
-          <h3>deepseek-flash <span class="badge">平台额度计量</span></h3>
-          <p>DeepSeek 快速模型，支持思考模式，适合需要较强推理的对话与生成任务 · 按平台额度计量。</p>
-        </div>
-        <div class="card">
-          <h3>deepseek-flash-none <span class="badge">平台额度计量</span></h3>
-          <p>DeepSeek 快速模型的非思考变体，响应更快、同类任务消耗更低 · 按平台额度计量。</p>
-        </div>
-      </div>
-    </section>
+  <div class="page">
+    <h2>一个账号，把对话、模型和账目放在一起</h2>
+    <p class="page-sub">Aivaro 是正在受控试运行的 AI 对话工作台。主角是登录后的对话本身，这一页只做说明。</p>
+    <div class="grid2">
+      <article class="card"><h3>多模型对话</h3><p>在同一个工作台里切换模型，用量记录按模型分开统计，切换不丢上下文入口。</p></article>
+      <article class="card"><h3>个人额度，互不挤占</h3><p>每个账号有独立额度；全站另有每日总上限，先到先得，耗尽时如实提示而不是静默失败。</p></article>
+      <article class="card"><h3>逐笔可查</h3><p>调用前先预留额度，完成后按实际用量结算，多退少补；失败的调用全额退回，并在记录里写明原因。</p></article>
+      <article class="card"><h3>密码不经过本站</h3><p>登录密码只在网关侧校验，本站不保存密码；会话可随时退出失效。</p></article>
+    </div>
 
-    <section class="block">
-      <h2>如何开始使用</h2>
-      <div class="steps">
-        <div class="step">
-          <span class="num">1</span>
-          <h3>开通账号</h3>
-          <p>本站不开放自助注册。试运行账号由管理员开通，可通过<a href="contact.html">联系我们</a>页面提交申请。</p>
-        </div>
-        <div class="step">
-          <span class="num">2</span>
-          <h3>登录工作台</h3>
-          <p>打开<a href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">工作台</a>，使用管理员发放的账号登录。未登录状态下无法发起任何模型调用。</p>
-        </div>
-        <div class="step">
-          <span class="num">3</span>
-          <h3>选择模型并对话</h3>
-          <p>在工作台中选择模型开始对话；你的个人额度与每次调用的用量都会记录，可随时核对。</p>
-        </div>
-      </div>
-      <p style="margin-top:14px"><a href="status.html">查看服务状态 →</a> · <a href="models.html">查看模型与计量说明 →</a></p>
-    </section>
+    <h3 class="sect">当前可用模型</h3>
+    <div class="cards-stack">
+      <article class="card">
+        <div class="mc-head"><code>cohere/north-mini-code:free</code><span class="tag-free">免费测试</span><span class="tag-ok">可用</span></div>
+        <p>Cohere 的代码与通用对话模型，经 OpenRouter 免费池接入，与所有免费用户共享每日约 50 次的池子额度，高峰期可能排队或不可用。</p>
+        <p class="fact">默认模型 · 上下文 256K · 费用由免费池承担，个人额度按网关口径计量</p>
+      </article>
+      <article class="card">
+        <div class="mc-head"><code>deepseek-v4-flash</code><span class="tag-ok">可用</span><span class="tag-none">平台额度计量</span></div>
+        <p>DeepSeek 快速模型，支持思考模式。经 DeepSeek 官方接口接入，按平台额度计量。高峰时段（09:00–12:00、14:00–18:00）上游按更高价格计费，请留意用量。</p>
+        <p class="fact">在工作台中的显示名：deepseek-flash</p>
+      </article>
+      <article class="card">
+        <div class="mc-head"><code>deepseek-v4-flash · 非思考版</code><span class="tag-ok">可用</span><span class="tag-none">平台额度计量</span></div>
+        <p>同一模型的非思考版本，响应更快、用量更省，适合不需要长推理的日常问题。</p>
+        <p class="fact">在工作台中的显示名：deepseek-flash-none</p>
+      </article>
+    </div>
+    <p class="fine">完整的模型与计费说明见<a href="models.html">模型页</a>；未完成真实接入的模型不会出现在这里。</p>
 
+    <h3 class="sect" id="start">如何开始使用</h3>
+    <div class="steps">
+      <article class="step"><h3>1 · 取得账号</h3><p>试运行阶段不开放自助注册。请通过<a href="contact.html">联系页</a>向管理员申请，获得用户名后由管理员为你设定初始密码。</p></article>
+      <article class="step"><h3>2 · 登录工作台</h3><p>从本页的「进入工作台」进入登录页。工作台需要登录，登录状态最长保持 24 小时，退出即失效。</p></article>
+      <article class="step"><h3>3 · 开始对话</h3><p>选择模型即可对话。你的剩余额度显示在工作台中，每次调用的预留、结算与退回都能在记录里核对。</p></article>
+    </div>
+
+    <article class="card">
+      <h3>计费口径（与网关现行规则一致）</h3>
+      <ul class="rules">
+        <li>按实际输入 / 输出 token 计量；请求失败不计费，预留额度全额退回。</li>
+        <li>每笔调用先预留、后按实际用量结算，多退少补，逐笔可查。</li>
+        <li>每个账号的额度互相独立；全站每日总上限耗尽时，当日暂停并如实提示。</li>
+      </ul>
+    </article>
   </div>
 </main>
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <div>
-      <strong>Aivaro</strong>
-      <p>AI 对话工作台 · 当前为受控试运行阶段，运行于免费托管环境，不提供 SLA。</p>
-    </div>
-    <nav class="footer-links">
+<footer>
+  <div class="foot-in">
+    <div class="foot-links">
       <a href="models.html">模型</a>
-      <a href="docs.html">接入文档</a>
-      <a href="status.html">服务状态</a>
-      <a href="terms.html">服务条款（草案）</a>
-      <a href="privacy.html">隐私政策（草案）</a>
-      <a href="contact.html">联系我们</a>
-    </nav>
+      <a href="docs.html">文档</a>
+      <a href="status.html">状态</a>
+      <a href="contact.html">联系</a>
+      <a href="privacy.html">隐私说明</a>
+      <a href="terms.html">使用条款</a>
+    </div>
+    <p class="foot-note">© 2026 Aivaro · 受控试运行，未公开商用。页面内容以当前真实服务状态为准；服务可能因维护或上游额度暂停，不构成可用性承诺。</p>
   </div>
-  <div class="container footer-bottom">© 2026 Aivaro · 本站条款与隐私政策为草案，以正式发布版本为准。</div>
 </footer>
 
+<script>
+(function(){
+  var btn=document.getElementById('navToggle'), nav=document.getElementById('mobileNav');
+  if(!btn||!nav) return;
+  btn.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open?'true':'false');
+  });
+  nav.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){ nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  });
+})();
+</script>
 </body>
 </html>
