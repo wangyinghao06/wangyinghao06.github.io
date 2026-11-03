@@ -27,16 +27,16 @@ var scroll = document.getElementById("msgScroll");
 var input = document.getElementById("composerInput");
 var form = document.getElementById("composerForm");
 
-/* ---------- 模型选择：液态透镜（仅本地状态，不在本站发送） ---------- */
+/* ---------- 模型选择：分段选择器（仅本地状态，不在本站发送） ---------- */
 var modelKey = "cohere";
 if (track) {
 track.dataset.value = modelKey;
-if (window.AivaroLens) {
-window.AivaroLens.init(track, function (key) { modelKey = key;});
+if (window.AivaroModelSelector) {
+window.AivaroModelSelector.init(track, function (key) { modelKey = key;});
 } else {
-track.querySelectorAll(".lg-seg").forEach(function (b) {
+track.querySelectorAll(".ms-seg").forEach(function (b) {
 b.addEventListener("click", function () {
-track.querySelectorAll(".lg-seg").forEach(function (x) {
+track.querySelectorAll(".ms-seg").forEach(function (x) {
 var on = x === b;
 x.setAttribute("aria-checked", String(on));
 x.tabIndex = on? 0: -1;

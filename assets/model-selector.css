@@ -1,0 +1,52 @@
+/* ============================================================
+   Aivaro · 分段选择器（segmented control，真机修订版）
+   版式结构参照豆包网页端分段控件（浅灰轨道＋等宽分段＋白色滑块），
+   原创实现、零依赖；令牌沿用 theme.css（--ink/--ink-2/--accent/--m-*）。
+   取代液态透镜版（用户真机实测否决：卡顿＋比例不协调，2026-11-03）。
+   性能红线：零 backdrop-filter、零 SVG filter、零克隆层、零逐帧 JS；
+   滑动只动滑块的 transform 一个属性，过渡 220ms ease-out、无回弹过冲。
+   比例：轨道紧凑——桌面高 42px、移动端 40px；三段等宽 flex:1。
+   无 JS 时为普通分段按钮组（滑块不定位，选中态仍由文字色重表达）。
+   ============================================================ */
+.ms-track{
+  position:relative;display:flex;padding:3px;border-radius:999px;
+  background:rgba(22,28,58,.055);border:1px solid rgba(22,28,58,.05);
+  isolation:isolate;touch-action:manipulation;
+}
+/* 白色滑块：纯白底＋柔和阴影＋发丝边，只用 transform 平移 */
+.ms-thumb{position:absolute;top:3px;left:0;height:calc(100% - 6px);border-radius:999px;
+  background:#fff;border:1px solid rgba(22,28,58,.07);box-sizing:border-box;
+  box-shadow:0 1px 2px rgba(22,28,58,.07),0 4px 14px rgba(22,28,58,.09);
+  pointer-events:none;z-index:0;
+  transition:transform .22s ease-out}
+.ms-seg{position:relative;z-index:1;flex:1 1 0;min-width:0;height:34px;border:0;background:transparent;border-radius:999px;
+  font:inherit;font-size:14px;color:var(--ink-2);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;padding:0 6px;-webkit-tap-highlight-color:transparent;
+  transition:color .18s ease}
+.ms-seg .seg-in{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;max-width:100%}
+.ms-seg .lbl{overflow:hidden;text-overflow:ellipsis}
+.ms-seg .dot{width:8px;height:8px;border-radius:50%;background:var(--c);opacity:.45;flex:none}
+.ms-seg[aria-checked="true"]{color:var(--ink);font-weight:600}
+.ms-seg[aria-checked="true"] .dot{opacity:1}
+.ms-seg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lbl-short{display:none}
+
+/* ---------- 接入位置：两页 .model-pick 内的轨道布局 ---------- */
+.model-pick .ms-track{width:100%}
+.ch-composer-row .model-pick{flex:1 1 auto;min-width:0}
+.ws-top .model-pick{flex:1 1 auto;min-width:0;max-width:640px}
+
+@media (max-width:560px){
+  .lbl-full{display:none}
+  .lbl-short{display:inline}
+  .ms-seg{height:32px;font-size:12.5px;padding:0 2px}
+  .ms-seg .dot{display:none} /* 窄屏段内隐藏色点防拥挤，全名由 aria-label 与回复署名承载 */
+  .ch-composer-row{flex-wrap:wrap}
+  .ch-composer-row .model-pick{flex:1 1 100%;order:1}
+  .ch-composer-row .btn{order:2}
+  .ws-top .model-pick{max-width:none}
+}
+@media (prefers-reduced-motion: reduce){
+  .ms-thumb{transition:none}
+  .ms-seg{transition:none}
+}
