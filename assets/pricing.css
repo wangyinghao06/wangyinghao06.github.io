@@ -1,0 +1,80 @@
+/* 收费标准页（pricing-page 暂存构建）——只用 final-w 纯白 Token，类名 p- 前缀防与 theme.css 冲突。
+   并入时：本文件放 site/assets/pricing.css，models.html 增引一行 link。 */
+
+.num{font-variant-numeric:tabular-nums}
+
+/* ---- 数据新鲜度与搜索 ---- */
+.p-freshness{font-size:13px;color:var(--ink-3);margin:-14px 0 18px}
+.p-search{display:flex;align-items:center;gap:10px;max-width:420px;margin:0 0 26px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-s);padding:0 14px}
+.p-search input{flex:1;border:0;background:transparent;font:inherit;font-size:15px;color:var(--ink);
+  min-height:44px;outline:none}
+.p-search input::placeholder{color:var(--ink-3)}
+.p-search .p-search-icon{color:var(--ink-3);flex:none}
+.p-noresult{font-size:14.5px;color:var(--ink-2);border:1px dashed var(--line);border-radius:var(--r-m);
+  padding:18px 20px;margin:0 0 26px}
+
+/* ---- 模型卡 ---- */
+.p-cards{display:flex;flex-direction:column;gap:18px;margin:0 0 14px}
+.pcard{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r-l);
+  box-shadow:var(--shadow-card);padding:22px 24px}
+.pcard-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pcard-name{font-size:16.5px;font-weight:650;color:var(--ink);word-break:break-all}
+.pcard-vendor{font-size:13.5px;color:var(--ink-3)}
+.pcard-context{margin-left:auto;font-size:12.5px;color:var(--ink-2);border:1px solid var(--line);
+  border-radius:999px;padding:3px 10px;white-space:nowrap}
+.pcard-desc{margin:10px 0 0;color:var(--ink-2);font-size:14.5px}
+.pcard-tags{margin:12px 0 0;display:flex;gap:8px;flex-wrap:wrap}
+
+.p-price{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:18px 0 0;
+  border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.p-price-cell{padding:14px 18px 14px 0}
+.p-price-cell + .p-price-cell{border-left:1px solid var(--line-soft);padding-left:18px}
+.p-price-label{display:block;font-size:12.5px;color:var(--ink-3);margin:0 0 4px}
+.p-price-value{display:block;font-size:23px;font-weight:680;line-height:1.2;color:var(--ink)}
+.p-price-unit{display:block;font-size:12px;color:var(--ink-3);margin:3px 0 0}
+
+.p-human{margin:14px 0 0;font-size:14.5px;color:var(--ink-2)}
+.p-human strong{color:var(--ink)}
+
+.p-groups{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 0}
+.p-groups-label{font-size:13px;color:var(--ink-3)}
+.p-chip{font-size:13px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:3px 11px}
+.p-groups-note{font-size:13px;color:var(--ink-3);margin:10px 0 0}
+
+.p-status{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin:14px 0 0;
+  background:var(--bg-2);border-radius:var(--r-s);padding:10px 14px}
+.p-status-label{font-size:13.5px;font-weight:650;color:var(--ink);white-space:nowrap}
+.p-status-basis{font-size:13px;color:var(--ink-2)}
+.p-status-metrics{font-size:13px;color:var(--ink-2)}
+
+.p-typical{margin:16px 0 0;padding:13px 0 0;border-top:1px solid var(--line-soft);
+  font-size:14.5px;color:var(--ink-2)}
+.p-typical strong{color:var(--ink)}
+.p-typical-note{font-size:13px;color:var(--ink-3)}
+
+/* ---- 一次调用解剖图 ---- */
+.p-anatomy{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:6px 0 18px;list-style:none;padding:0}
+.p-step{position:relative;padding:4px 22px 4px 0}
+.p-step + .p-step{padding-left:22px}
+.p-step:not(:last-child)::after{content:"→";position:absolute;right:-7px;top:22px;
+  color:var(--ink-3);font-size:16px}
+.p-step-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+  border-radius:50%;background:var(--accent-dim);color:var(--accent);font-size:13.5px;font-weight:680;margin:0 0 8px}
+.p-step h3{font-size:15.5px;margin:0 0 5px;font-weight:650}
+.p-step p{margin:0;font-size:13.5px;color:var(--ink-2)}
+.p-formula{background:var(--bg-2);border:1px solid var(--line-soft);border-radius:var(--r-l);padding:18px 24px}
+.p-formula-main{font-size:16.5px;font-weight:650;color:var(--ink);margin:0 0 8px}
+.p-formula-example{margin:0;font-size:14.5px;color:var(--ink-2)}
+.p-formula-example strong{color:var(--ink)}
+
+@media (max-width:720px){
+  .pcard{padding:18px}
+  .p-price{grid-template-columns:1fr;gap:0}
+  .p-price-cell{padding:11px 0}
+  .p-price-cell + .p-price-cell{border-left:none;border-top:1px solid var(--line-soft);padding-left:0}
+  .p-anatomy{grid-template-columns:1fr;gap:14px}
+  .p-step + .p-step{padding-left:0}
+  .p-step:not(:last-child)::after{content:"↓";right:auto;left:12px;top:auto;bottom:-15px}
+  .pcard-context{margin-left:0}
+}
