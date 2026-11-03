@@ -9,8 +9,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand-icon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/brand-icon-180.png">
 <link rel="stylesheet" href="assets/theme.css">
-<link rel="stylesheet" href="assets/liquid-selector.css">
-<script src="assets/liquid-selector.js" defer></script>
+<link rel="stylesheet" href="assets/model-selector.css">
+<script src="assets/model-selector.js" defer></script>
 <script src="assets/app-prod.js" defer></script>
 </head>
 <body>
@@ -91,11 +91,11 @@
       <textarea id="composerInput" rows="2" placeholder="输入消息，Enter 发送，Shift + Enter 换行"></textarea>
       <div class="ch-composer-row">
         <div class="model-pick">
-          <div class="lg-track" id="modelTrack" role="radiogroup" aria-label="选择模型">
-            <div class="lg-lens" aria-hidden="true"><div class="lg-row"></div></div>
-            <button class="lg-seg" type="button" role="radio" aria-checked="true" tabindex="0" data-model="cohere" aria-label="模型 cohere/north-mini-code:free"><span class="seg-in"><span class="dot" style="--c:var(--m-cohere)" aria-hidden="true"></span><span class="lbl lbl-full">Cohere North Mini Code</span><span class="lbl lbl-short">Cohere</span></span></button>
-            <button class="lg-seg" type="button" role="radio" aria-checked="false" tabindex="-1" data-model="deepseek" aria-label="模型 deepseek-flash"><span class="seg-in"><span class="dot" style="--c:var(--m-deepseek)" aria-hidden="true"></span><span class="lbl lbl-full">DeepSeek Flash</span><span class="lbl lbl-short">DeepSeek</span></span></button>
-            <button class="lg-seg" type="button" role="radio" aria-checked="false" tabindex="-1" data-model="deepseek-none" aria-label="模型 deepseek-flash-none，非思考变体"><span class="seg-in"><span class="dot" style="--c:var(--m-deepseek-none)" aria-hidden="true"></span><span class="lbl lbl-full">DeepSeek Flash 免思考</span><span class="lbl lbl-short">DeepSeek 免思考</span></span></button>
+          <div class="ms-track" id="modelTrack" role="radiogroup" aria-label="选择模型">
+            <div class="ms-thumb" aria-hidden="true"></div>
+            <button class="ms-seg" type="button" role="radio" aria-checked="true" tabindex="0" data-model="cohere" aria-label="模型 cohere/north-mini-code:free"><span class="seg-in"><span class="dot" style="--c:var(--m-cohere)" aria-hidden="true"></span><span class="lbl lbl-full">Cohere North Mini Code</span><span class="lbl lbl-short">Cohere</span></span></button>
+            <button class="ms-seg" type="button" role="radio" aria-checked="false" tabindex="-1" data-model="deepseek" aria-label="模型 deepseek-flash"><span class="seg-in"><span class="dot" style="--c:var(--m-deepseek)" aria-hidden="true"></span><span class="lbl lbl-full">DeepSeek Flash</span><span class="lbl lbl-short">DeepSeek</span></span></button>
+            <button class="ms-seg" type="button" role="radio" aria-checked="false" tabindex="-1" data-model="deepseek-none" aria-label="模型 deepseek-flash-none，非思考变体"><span class="seg-in"><span class="dot" style="--c:var(--m-deepseek-none)" aria-hidden="true"></span><span class="lbl lbl-full">DeepSeek Flash 免思考</span><span class="lbl lbl-short">DeepSeek 免思考</span></span></button>
           </div>
         </div>
         <button class="btn btn-primary" id="sendBtn" type="submit">发送</button>
@@ -104,16 +104,6 @@
     <p class="ch-hint proto-note">未登录时点发送将前往工作台登录，草稿会自动带过去；登录后由你点真发送。</p>
   </div>
 </div>
-
-<!-- 液态透镜折射滤镜：只作用于透镜内的克隆文字层，scale 很小；不支持的浏览器自动忽略，退化为纯放大+磨砂 -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <defs>
-    <filter id="lg-refract" x="-20%" y="-20%" width="140%" height="140%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.09" numOctaves="2" seed="7" stitchTiles="stitch" result="n"/>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-  </defs>
-</svg>
 
 </body>
 </html>
