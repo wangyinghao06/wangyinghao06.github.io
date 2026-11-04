@@ -1,0 +1,65 @@
+/* ============================================================
+   Aivaro · 液态玻璃透镜选择器（Liquid Glass lens segmented control）
+   由 experiments/liquid-selector.html 实验版移植（实验点验 20 项全过，对齐误差 ≤0.34px）。
+   观感构成：玻璃透镜胶囊（backdrop-filter）+ 透镜内克隆文字层（反向平移同步、
+   放大、SVG 位移折射 #lg-refract）+ 1.5px 彩虹渐变环 + 弹簧曲线滑动。
+   零依赖；令牌沿用 theme.css（--ink/--ink-2/--accent/--m-*）。
+   降级：不支持 filter:url() 时静默退化为纯放大＋磨砂；无 JS 时为普通分段按钮组。
+   ============================================================ */
+.lg-track{
+  --spring:cubic-bezier(.32,1.45,.42,1);
+  --spring-t:.55s;
+  position:relative;display:flex;gap:2px;padding:4px;border-radius:999px;
+  background:rgba(22,28,58,.055);border:1px solid rgba(22,28,58,.05);
+  isolation:isolate;touch-action:manipulation;
+}
+.lg-seg{position:relative;z-index:1;flex:1 1 0;min-height:48px;border:0;background:transparent;border-radius:999px;
+  font:inherit;font-size:14px;color:var(--ink-2);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;padding:0 6px;-webkit-tap-highlight-color:transparent}
+.lg-seg .seg-in{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:opacity .18s ease}
+.lg-seg .dot{width:8px;height:8px;border-radius:50%;background:var(--c);opacity:.5;flex:none}
+.lg-seg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lg-track.js .lg-seg[aria-checked="true"] .seg-in{opacity:0} /* 选中段的真实文字让位给透镜内的放大克隆 */
+.lbl-short{display:none}
+
+/* 透镜：玻璃胶囊本体（只用 transform 移动） */
+.lg-lens{position:absolute;top:4px;left:0;height:calc(100% - 8px);border-radius:999px;overflow:hidden;pointer-events:none;z-index:2;will-change:transform;
+  background:linear-gradient(135deg,rgba(255,255,255,.62),rgba(255,255,255,.16) 46%,rgba(255,255,255,.42));
+  -webkit-backdrop-filter:blur(2.5px) saturate(1.7) brightness(1.03);
+  backdrop-filter:blur(2.5px) saturate(1.7) brightness(1.03);
+  box-shadow:0 10px 24px rgba(22,28,58,.15),0 2px 6px rgba(22,28,58,.08),inset 0 1px 0 rgba(255,255,255,.9),inset 0 -1px 1px rgba(255,255,255,.35),inset 0 0 0 1px rgba(255,255,255,.45);
+  transition:transform var(--spring-t) var(--spring)}
+/* 彩虹色散边：1.5px 渐变环，极淡，只在边缘 */
+.lg-lens::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;z-index:3;
+  background:linear-gradient(115deg,rgba(255,80,150,.40),rgba(255,180,70,.30) 28%,rgba(70,210,255,.38) 58%,rgba(150,110,255,.36));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;opacity:.55}
+/* 高光：顶部主高光 + 底部微反光 */
+.lg-lens::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:3;
+  background:radial-gradient(130% 100% at 28% -10%,rgba(255,255,255,.8),rgba(255,255,255,0) 55%),radial-gradient(90% 70% at 85% 115%,rgba(255,255,255,.35),rgba(255,255,255,0) 60%)}
+/* 透镜内克隆层：与轨道 1:1 对齐的文字副本，反向平移保持对位，逐字放大 + SVG 位移折射 */
+.lg-row{position:absolute;top:0;left:0;height:100%;display:flex;gap:2px;padding:0 4px;box-sizing:border-box;
+  filter:url(#lg-refract);will-change:transform;transition:transform var(--spring-t) var(--spring)}
+.lg-cell{flex:none;display:flex;align-items:center;justify-content:center;height:100%}
+.lg-cell .seg-in{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transform:scale(1.13);color:var(--ink);font-weight:600;font-size:14px}
+.lg-cell .dot{width:8px;height:8px;border-radius:50%;background:var(--c);opacity:1;flex:none;box-shadow:0 0 0 3px rgba(255,255,255,.35)}
+
+/* ---------- 接入位置：两页 .model-pick 内的轨道布局 ---------- */
+.model-pick .lg-track{width:100%}
+.ch-composer-row .model-pick{flex:1 1 auto;min-width:0}
+.ws-top .model-pick{flex:1 1 auto;min-width:0;max-width:640px}
+
+@media (max-width:560px){
+  .lbl-full{display:none}
+  .lbl-short{display:inline}
+  .lg-seg{font-size:12.5px;padding:0 2px}
+  .lg-cell .seg-in{font-size:12px;transform:scale(1.05)} /* 放大克隆在窄段内收小倍率+字号，防裁切（桌面仍 1.13×） */
+  .lg-seg .dot,.lg-cell .dot{display:none} /* 窄屏段内隐藏色点防溢出，全名由 aria-label 与回复署名承载 */
+  .ch-composer-row{flex-wrap:wrap}
+  .ch-composer-row .model-pick{flex:1 1 100%;order:1}
+  .ch-composer-row .btn{order:2}
+  .ws-top .model-pick{max-width:none}
+}
+@media (prefers-reduced-motion: reduce){
+  .lg-lens,.lg-row{transition:none}
+}
