@@ -1,2 +1,5 @@
 User-agent: *
-Disallow: /
+Disallow: /go.html
+Disallow: /tools/
+
+Sitemap: https://aivaro.site/sitemap.xml
