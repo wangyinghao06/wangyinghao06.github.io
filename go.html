@@ -10,9 +10,10 @@
 </head>
 <body>
 <main class="wrap" style="padding:64px 20px">
-  <p style="font-size:17px">正在前往 <strong id="goDomain">官网</strong> …</p>
+  <p id="goStatus" style="font-size:17px">正在前往 <strong id="goDomain">官网</strong> …</p>
   <p style="color:var(--ink-2);font-size:14px">目标站点：<span id="goDomainText">—</span></p>
-  <p style="color:var(--ink-2);font-size:14px">若没有自动跳转，请点 <a id="goManual" href="directory.html">这里继续前往</a>；点错了可以<a href="directory.html">返回目录</a>。</p>
+  <p id="goHint" style="color:var(--ink-2);font-size:14px">若没有自动跳转，请点 <a id="goManual" href="directory.html">这里继续前往</a>；点错了可以<a href="directory.html">返回目录</a>。</p>
+  <p id="goSlow" hidden style="font-size:17px">网络较慢，未能加载。<br><span style="font-size:14px;color:var(--ink-2)">可以 <a href="#" id="goRetry">重试</a>，或 <a href="directory.html">返回目录</a>。</span></p>
   <p style="color:var(--ink-3);font-size:13px">你正在离开 Aivaro 前往第三方站点，注册、充值与使用均发生在对方站点，请自行核对条款。</p>
 </main>
 <script src="assets/analytics.js"></script>
@@ -27,13 +28,30 @@ const ENABLE_UTM_PASSTHROUGH = false; // 推广参数透传位点（预留，本
   const back = () => location.replace('directory.html');
   const id = new URLSearchParams(location.search).get('id') || '';
   if (!id) return back();
+  /* 分支乙（2026-11-06 定版）：超时（10 秒）或拉取失败 → 停留在本页，
+   * 显示「网络较慢，未能加载」＋重试/返回目录，不自动跳转。
+   * settled 为完成标志：超时与加载回调只生效先到者，防竞态下二次跳转。 */
+  let settled = false;
+  const showSlow = () => {
+    if (settled) return;
+    settled = true;
+    document.getElementById('goStatus').hidden = true;
+    document.getElementById('goDomainText').parentElement.hidden = true;
+    document.getElementById('goHint').hidden = true;
+    document.getElementById('goSlow').hidden = false;
+  };
+  document.getElementById('goRetry').addEventListener('click', e => { e.preventDefault(); location.reload(); });
+  const timer = setTimeout(showSlow, 10000);
   let svc = null;
   try {
     const res = await fetch('data/services.json');
-    if (!res.ok) return back();
+    if (!res.ok) { clearTimeout(timer); return showSlow(); }
     const data = await res.json();
+    if (settled) return; // 已超时进入分支乙：迟到的数据不再触发跳转
+    settled = true;
+    clearTimeout(timer);
     svc = (data.services || []).find(s => s.id === id);
-  } catch (e) { return back(); }
+  } catch (e) { clearTimeout(timer); return showSlow(); }
   if (!svc || !svc.website) return back();
   let target = svc.website;
   try { // 目标域名可见显示（跳转前短暂可见，也是兜底页的信息）

@@ -6,10 +6,10 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
 <title>价格对比 · Aivaro 导航</title>
-<meta name="description" content="选定一个模型，横向对比各中转服务商的输入/输出价格、免费额度与核实时间。">
+<meta name="description" content="选定一个模型，横向对比各服务商的输入/输出价格、免费额度与核实时间。">
 <link rel="canonical" href="https://aivaro.site/compare.html">
 <meta property="og:title" content="价格对比 · Aivaro 导航">
-<meta property="og:description" content="选定一个模型，横向对比各中转服务商的输入/输出价格、免费额度与核实时间。">
+<meta property="og:description" content="选定一个模型，横向对比各服务商的输入/输出价格、免费额度与核实时间。">
 <meta property="og:url" content="https://aivaro.site/compare.html">
 <meta property="og:type" content="website">
 <link rel="icon" href="assets/brand-icon-32.png">
@@ -67,6 +67,7 @@
 <main class="wrap">
   <div class="page-h">
     <h1>价格对比</h1>
+    <p style="font-size:13px;color:var(--ink-3);margin:6px 0 0">数据更新于 <span id="cmpDataDate">—</span></p>
     <p>先选模型，再横向看各家公示价。只有在服务商<strong>官方页面逐项核实到</strong>的价格才进表；没有核实到的如实列在表下，不估算、不代入别家数据。</p>
   </div>
 
@@ -77,9 +78,19 @@
         <option value="input">按输入价</option>
         <option value="output">按输出价</option>
         <option value="cache_read">按缓存读价</option>
+        <option value="total">按估算总成本</option>
       </select>
     </label>
   </div>
+
+  <div style="margin:0 0 16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+    <span style="font-size:13px;color:var(--ink-3)">用量估算</span>
+    <label style="font-size:13px;color:var(--ink-3)">输入 <input type="number" id="useIn" value="10" min="0" step="1" style="width:76px;height:38px;border:1px solid var(--line);border-radius:2px;padding:0 8px;font-size:14px;color:var(--ink);background:var(--surface)"> M tokens</label>
+    <label style="font-size:13px;color:var(--ink-3)">输出 <input type="number" id="useOut" value="2" min="0" step="1" style="width:76px;height:38px;border:1px solid var(--line);border-radius:2px;padding:0 8px;font-size:14px;color:var(--ink);background:var(--surface)"> M tokens</label>
+    <label style="font-size:13px;color:var(--ink-3)">缓存命中率 <input type="number" id="useHit" value="0" min="0" max="100" step="5" style="width:64px;height:38px;border:1px solid var(--line);border-radius:2px;padding:0 8px;font-size:14px;color:var(--ink);background:var(--surface)"> %</label>
+    <span id="useMode" style="font-size:13px;color:var(--ink-3)"></span>
+  </div>
+  <p class="note">估算仅供参考，不含充值汇率、手续费、折扣。</p>
 
   <div class="tablewrap">
     <table class="cmp" id="cmpTable">
@@ -89,6 +100,7 @@
           <th scope="col">输入价</th>
           <th scope="col">输出价</th>
           <th scope="col">缓存读价</th>
+          <th scope="col">估算总成本</th>
           <th scope="col">计费单位</th>
           <th scope="col">免费额度</th>
           <th scope="col">核实时间</th>
@@ -133,6 +145,20 @@
   const services = data.services;
   const models = data.meta.compare_models;
   let current = models[0].id;
+  document.getElementById('cmpDataDate').textContent =
+    services.reduce((a, s) => (s.verified_at || '') > a ? s.verified_at : a, '') || (data.meta && data.meta.verified_at) || '—';
+  const usage = () => {
+    const gi = id => { const v = parseFloat(document.getElementById(id).value); return isNaN(v) || v < 0 ? 0 : v; };
+    const hit = Math.min(100, gi('useHit')) / 100;
+    return { inM: gi('useIn'), outM: gi('useOut'), hit };
+  };
+  const totalOf = (p, u) => {
+    if (p.input == null || p.output == null) return null;
+    const cacheP = p.cache_read != null ? p.cache_read : p.input;
+    const effIn = (1 - u.hit) * p.input + u.hit * cacheP;
+    return u.inM * effIn + u.outM * p.output;
+  };
+  const fmtTotal = t => t == null ? '—' : '$' + String(Math.round(t * 10000) / 10000);
 
   const seg = document.getElementById('modelSeg');
   seg.innerHTML = models.map((m, i) =>
@@ -151,7 +177,11 @@
       else unverified.push(s.name);
     });
     const metric = document.getElementById('cmpSort').value;
-    const val = r => r.price[metric];
+    const u = usage();
+    document.getElementById('useMode').textContent = u.hit === 0
+      ? '当前口径：缓存按未命中估算（输入全部按输入价计）'
+      : '当前口径：缓存命中率 ' + Math.round(u.hit * 100) + '%（命中部分按缓存读价、未命中按输入价计；无缓存读价的服务商按输入价计）';
+    const val = r => metric === 'total' ? totalOf(r.price, u) : r.price[metric];
     rows.sort((a, b) => {
       const x = val(a), y = val(b);
       if (x == null && y == null) return a.svc.name.localeCompare(b.svc.name, 'zh');
@@ -174,12 +204,13 @@
       '<td class="price">' + fmtUsd(r.price.input) + '</td>' +
       '<td class="price">' + fmtUsd(r.price.output) + '</td>' +
       '<td class="price">' + (r.price.cache_read != null ? fmtUsd(r.price.cache_read) : '—') + '</td>' +
+      '<td class="price">' + fmtTotal(totalOf(r.price, u)) + '</td>' +
       '<td>' + esc(r.price.currency) + ' · ' + esc(r.price.unit) + '</td>' +
       '<td style="max-width:220px">' + freeLabel(r.svc) + '</td>' +
       '<td>' + esc(r.svc.verified_at) + '</td>' +
       '<td><a href="detail.html?id=' + encodeURIComponent(r.svc.id) + '">详情</a></td>' +
       '</tr>'
-    ).join('') || '<tr><td colspan="8">该模型暂无已核实的跨站价格。</td></tr>';
+    ).join('') || '<tr><td colspan="9">该模型暂无已核实的跨站价格。</td></tr>';
     document.getElementById('cmpNote').textContent =
       '已核实到该模型价格的服务 ' + rows.length + ' 家；其余收录服务（' + unverified.join('、') +
       '）未在其官方页面核实到该模型的逐项价格，标为待核实，未纳入本表。';
@@ -192,6 +223,7 @@
     render();
   });
   document.getElementById('cmpSort').addEventListener('change', render);
+  ['useIn', 'useOut', 'useHit'].forEach(id => document.getElementById(id).addEventListener('input', render));
 
   render();
 })();
