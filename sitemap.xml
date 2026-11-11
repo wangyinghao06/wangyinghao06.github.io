@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://aivaro.site/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://aivaro.site/directory.html</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://aivaro.site/compare.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://aivaro.site/directory.html</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aivaro.site/compare.html</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://aivaro.site/free.html</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://aivaro.site/about.html</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://aivaro.site/submit.html</loc><lastmod>2026-11-04</lastmod></url>
@@ -47,4 +47,10 @@
   <url><loc>https://aivaro.site/detail.html?id=rivora-cc</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://aivaro.site/detail.html?id=apirouter-chat</loc><lastmod>2026-11-03</lastmod></url>
   <url><loc>https://aivaro.site/detail.html?id=api000-com</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://aivaro.site/detail.html?id=deepseek-platform</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aivaro.site/detail.html?id=openai-api</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aivaro.site/detail.html?id=anthropic-api</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aivaro.site/detail.html?id=groqcloud</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aivaro.site/detail.html?id=together-ai</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aivaro.site/detail.html?id=moonshot-kimi</loc><lastmod>2026-11-11</lastmod></url>
 </urlset>
