@@ -254,7 +254,7 @@ function adRowHTML(data) {
       '<p class="ad-name">' + esc(a.name) + '</p>' +
       '<div class="ad-dom">' + esc(a.domain) + '</div>' +
       '<p class="ad-intro">' + esc(a.intro) + '</p>' +
-      '<a class="btn ad-go" href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer sponsored">访问官网</a></article>';
+      '<a class="btn ad-go" href="go.html?ad=' + i + '" target="_blank" rel="noopener sponsored">访问官网</a></article>';
   }
   for (let i = 0; i < open; i++) {
     html += '<a class="ad-card" href="advertise.html" aria-label="广告招商"><span class="ad-tag">广告招商</span>' +

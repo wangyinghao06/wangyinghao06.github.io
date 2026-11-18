@@ -14,6 +14,7 @@
   <p style="color:var(--ink-2);font-size:14px">目标站点：<span id="goDomainText">—</span></p>
   <p id="goHint" style="color:var(--ink-2);font-size:14px">若没有自动跳转，请点 <a id="goManual" href="directory.html">这里继续前往</a>；点错了可以<a href="directory.html">返回目录</a>。</p>
   <p id="goSlow" hidden style="font-size:17px">网络较慢，未能加载。<br><span style="font-size:14px;color:var(--ink-2)">可以 <a href="#" id="goRetry">重试</a>，或 <a href="directory.html">返回目录</a>。</span></p>
+  <p id="goAdMark" hidden style="font-size:14px"><span style="border:1px solid var(--line);padding:2px 8px;font-weight:700;font-size:12px">广告</span> <strong id="goAdName"></strong>（广告链接，将前往广告主的站点；广告不影响本站的收录、排序与推荐。）</p>
   <p style="color:var(--ink-3);font-size:13px">你正在离开 Aivaro 前往第三方站点，注册、充值与使用均发生在对方站点，请自行核对条款。</p>
 </main>
 <script src="assets/analytics.js"></script>
@@ -21,13 +22,19 @@
 'use strict';
 /* 官网跳转统一出口（加固口径）：
  * - 只接受 id 参数；白名单 = data/services.json 内的服务 id 集合，查不到回目录页；
+ * - 广告链接走 ad=<席位序号>（第三批）：目标只来自同文件的 ad_slots，页面明示「广告」后跳转；
  * - 不接受任何 URL 直传参数：url / target 等一律忽略，目标只来自数据文件；
  * - 跳转前经 sendEvent 记录一次 click_out（预留统计，当前仅本地缓冲）。 */
 const ENABLE_UTM_PASSTHROUGH = false; // 推广参数透传位点（预留，本轮不启用）：启用时把本页 URL 的 utm_* 参数拼到目标地址
 (async function () {
   const back = () => location.replace('directory.html');
-  const id = new URLSearchParams(location.search).get('id') || '';
-  if (!id) return back();
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id') || '';
+  /* 广告模式（第三批）：只接受 ad=<席位序号>，目标从 data/services.json 的 ad_slots[序号] 解析，
+   * 与 id 模式同样不接受任何 URL 直传参数；序号非法或槽位不存在回目录。 */
+  const adRaw = params.get('ad');
+  const adMode = id === '' && adRaw !== null;
+  if (!id && !adMode) return back();
   /* 分支乙（2026-11-06 定版）：超时（10 秒）或拉取失败 → 停留在本页，
    * 显示「网络较慢，未能加载」＋重试/返回目录，不自动跳转。
    * settled 为完成标志：超时与加载回调只生效先到者，防竞态下二次跳转。 */
@@ -43,6 +50,8 @@ const ENABLE_UTM_PASSTHROUGH = false; // 推广参数透传位点（预留，本
   document.getElementById('goRetry').addEventListener('click', e => { e.preventDefault(); location.reload(); });
   const timer = setTimeout(showSlow, 10000);
   let svc = null;
+  let slot = null;
+  let adIndex = -1;
   try {
     const res = await fetch('data/services.json');
     if (!res.ok) { clearTimeout(timer); return showSlow(); }
@@ -50,10 +59,22 @@ const ENABLE_UTM_PASSTHROUGH = false; // 推广参数透传位点（预留，本
     if (settled) return; // 已超时进入分支乙：迟到的数据不再触发跳转
     settled = true;
     clearTimeout(timer);
-    svc = (data.services || []).find(s => s.id === id);
+    if (adMode) {
+      adIndex = /^\d+$/.test(adRaw) ? parseInt(adRaw, 10) : -1;
+      const slots = (data.ads && data.ads.enabled) ? (data.ad_slots || []) : [];
+      slot = adIndex >= 0 && adIndex < slots.length ? slots[adIndex] : null;
+    } else {
+      svc = (data.services || []).find(s => s.id === id);
+    }
   } catch (e) { clearTimeout(timer); return showSlow(); }
-  if (!svc || !svc.website) return back();
-  let target = svc.website;
+  if (adMode) {
+    if (!slot || !slot.url) return back();
+  } else if (!svc || !svc.website) return back();
+  let target = adMode ? slot.url : svc.website;
+  if (adMode) { // 广告模式：先亮明广告标记与广告主，再跳转
+    document.getElementById('goAdName').textContent = slot.name || slot.domain || '';
+    document.getElementById('goAdMark').hidden = false;
+  }
   try { // 目标域名可见显示（跳转前短暂可见，也是兜底页的信息）
     const host = new URL(target).hostname.replace(/^www\./, '');
     document.getElementById('goDomain').textContent = host;
@@ -61,7 +82,8 @@ const ENABLE_UTM_PASSTHROUGH = false; // 推广参数透传位点（预留，本
   } catch (e) {}
   if (ENABLE_UTM_PASSTHROUGH) { /* 预留：utm_* 透传在此拼接，本轮不启用 */ }
   document.getElementById('goManual').href = target;
-  sendEvent('click_out', { page: 'go.html', service_id: svc.id });
+  if (adMode) sendEvent('click_out', { page: 'go.html', ad_slot: adIndex });
+  else sendEvent('click_out', { page: 'go.html', service_id: svc.id });
   location.replace(target);
 })();
 </script>

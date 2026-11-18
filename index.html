@@ -6,10 +6,10 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
 <title>Aivaro · AI 中转站导航</title>
-<meta name="description" content="发现、比较 AI 模型 API 服务：官方平台、中转与聚合的价格、免费额度、状态与官网入口，条条标注来源与核实时间。">
+<meta name="description" content="AI 模型 API 服务的价格、免费额度与官网入口：官方平台、中转与聚合，条条标注来源与核实时间。">
 <link rel="canonical" href="https://aivaro.site/">
 <meta property="og:title" content="Aivaro · AI 中转站导航">
-<meta property="og:description" content="发现、比较 AI 模型 API 服务：官方平台、中转与聚合的价格、免费额度、状态与官网入口，条条标注来源与核实时间。">
+<meta property="og:description" content="AI 模型 API 服务的价格、免费额度与官网入口：官方平台、中转与聚合，条条标注来源与核实时间。">
 <meta property="og:url" content="https://aivaro.site/">
 <meta property="og:type" content="website">
 <script type="application/ld+json">
@@ -18,7 +18,7 @@
   "@type": "WebSite",
   "name": "Aivaro · AI 中转站导航",
   "url": "https://aivaro.site/",
-  "description": "发现、比较 AI 模型 API 服务：官方平台、中转与聚合的价格、免费额度、状态与官网入口，条条标注来源与核实时间。",
+  "description": "AI 模型 API 服务的价格、免费额度与官网入口：官方平台、中转与聚合，条条标注来源与核实时间。",
   "inLanguage": "zh-CN"
 }
 </script>
@@ -94,6 +94,11 @@
   <section class="blk" aria-labelledby="h-hot">
     <div class="blk-h"><h2 id="h-hot">编辑精选</h2><span>按编辑评选与信息完整度排序，评选标准见<a href="about.html">关于页</a></span><a href="directory.html">全部服务 →</a></div>
     <div class="grid" id="hotGrid"></div>
+  </section>
+
+  <section class="blk" id="newsModule" aria-labelledby="h-news" hidden>
+    <div class="blk-h"><h2 id="h-news">最新动态</h2><span>官方平台、中转与聚合的公开动态，只采用官方来源、逐条回源核实</span><a href="ai-news.html">查看全部 →</a></div>
+    <div class="latest" id="newsList"></div>
   </section>
 
   <section class="blk" aria-labelledby="h-free">
@@ -175,6 +180,27 @@
     (newIds.has(s.id) ? '<span class="badge new">NEW</span>' : '') +
     '<span class="lt">' + esc(s.status) + '</span></a>'
   ).join('');
+})();
+</script>
+<script>
+/* 最新动态模块（第三批）：数据来自 data/news.json，取最近 3 条；加载失败保持隐藏，不影响首页其余内容 */
+(async function () {
+  const mod = document.getElementById('newsModule');
+  const list = document.getElementById('newsList');
+  try {
+    const res = await fetch('data/news.json');
+    if (!res.ok) return;
+    const news = await res.json();
+    const labels = news.categories || {};
+    const items = (news.items || []).slice(0, 3);
+    if (!items.length) return;
+    list.innerHTML = items.map(n =>
+      '<a href="ai-news.html#' + encodeURIComponent(n.id) + '"><time datetime="' + esc(n.date) + '">' + esc(n.date) + '</time>' +
+      '<span><strong>' + esc(n.title) + '</strong></span>' +
+      '<span class="lt">' + esc(labels[n.category] || n.category) + '</span></a>'
+    ).join('');
+    mod.hidden = false;
+  } catch (e) { /* 动态数据加载失败：模块保持隐藏 */ }
 })();
 </script>
 </body>
