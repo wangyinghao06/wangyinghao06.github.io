@@ -19,8 +19,8 @@
     ],
     "name": "Aivaro 导航数据",
     "rule": "每条事实均来自该服务官方页面或官方公开接口，source_url 为核实页面/接口；查不到的字段为空，页面显示「待核实」，不做推测填充。",
-    "verified_at": "2026-11-11",
-    "count": 45
+    "verified_at": "2026-11-18",
+    "count": 47
   },
   "ads": {
     "enabled": true,
@@ -101,13 +101,13 @@
           "unit": "每 1M tokens"
         },
         {
-          "cache_read": null,
+          "cache_read": 0.018,
           "currency": "USD",
-          "input": 0.006,
+          "input": 0.051,
           "model_id": "deepseek-v4.1-flash",
           "model_label": "DeepSeek V4.1 Flash",
-          "note": "其目录价（对比页最低价口径，随供应商不同可能浮动）",
-          "output": 0.5,
+          "note": "OpenRouter 官方 API 默认价（模型页 FAQ 与对比页 headline 口径）；同一模型各供应商价格不同",
+          "output": 0.567,
           "price_source_url": "https://openrouter.ai/compare/anthropic/claude-sonnet-5.5/deepseek/deepseek-v4.1-flash",
           "unit": "每 1M tokens"
         }
@@ -149,7 +149,7 @@
         "xAI",
         "Meta"
       ],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://openrouter.ai",
       "op_type": "聚合",
       "is_commercial": false,
@@ -165,6 +165,10 @@
         {
           "date": "2026-11-11",
           "event": "周三巡检：DeepSeek V4.1 Flash 输入价按对比页更新为 $0.006（输出 $0.50 不变）"
+        },
+        {
+          "date": "2026-11-18",
+          "event": "周三巡检：DeepSeek V4.1 Flash 按官方默认价更新为 $0.051/$0.567、缓存读 $0.018（对比页 headline 已由上周最低价口径回到默认价）"
         }
       ],
       "status_basis": {
@@ -186,6 +190,13 @@
           "note": "对比页原文：Input $0.006/M、Output $0.50/M；模型页 FAQ 同值；该模型 28 家供应商区间 $0.006–$0.45，官方 API 默认价 $0.051",
           "scope": "prices",
           "source_url": "https://openrouter.ai/compare/anthropic/claude-sonnet-5.5/deepseek/deepseek-v4.1-flash"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_page",
+          "note": "模型页 FAQ 原文：costs $0.051/M input tokens and $0.567/M output tokens, with separate rates for Cache Read at $0.018/M tokens；对比页 headline 同值；$0.006 仅为个别供应商价，不再作站内价",
+          "scope": "prices",
+          "source_url": "https://openrouter.ai/deepseek/deepseek-v4.1-flash"
         }
       ],
       "is_ad": false,
@@ -280,7 +291,7 @@
         "阶跃星辰",
         "ByteDance"
       ],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://www.siliconflow.cn",
       "op_type": "聚合",
       "is_commercial": false,
@@ -311,6 +322,13 @@
           "checked_at": "2026-11-11",
           "method": "official_page",
           "note": "官网首页与定价页均未见「新用户注册即得 14 元免费额度」明文（docs 站内搜索亦无该表述），该句暂记待核实、不改站内原文；免费模型层仍在",
+          "scope": "free_quota",
+          "source_url": "https://www.siliconflow.cn/pricing"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_page",
+          "note": "2026-11-18 第三周复核：官网首页与定价页全文仍未见「新用户注册即得 14 元免费额度」明文（“新用户”“赠送”“14元”“¥14”均为 0 命中；docs 首页亦无该表述），该句继续记待核实、不改站内原文；免费模型层仍在",
           "scope": "free_quota",
           "source_url": "https://www.siliconflow.cn/pricing"
         }
@@ -351,12 +369,12 @@
       "featured": true,
       "free_quota": {
         "has": true,
-        "text": "71 个免费模型，无需信用卡即可使用（模型页专区）；注册即得 10 次试用调用；充值 $1 起切换为每日配额（100 次/日、10 次/分、1M tokens/日）"
+        "text": "76 个免费模型，无需信用卡即可使用（模型页专区）；注册即得 10 次试用调用；充值 $1 起切换为每日配额（100 次/日、10 次/分、1M tokens/日）"
       },
       "id": "aihubmix",
       "intro": "面向开发者的统一网关，主打官方云线路与多线路自动故障转移，模型库规模在本批收录里最大。设有专门的免费模型区，并提供面向 AI 编程工具的一键配置应用。",
       "min_topup": null,
-      "model_count": "961（模型页在列）",
+      "model_count": "973（模型页在列）",
       "models_highlight": [
         "Claude Sonnet 5.5",
         "Claude Opus 5",
@@ -406,7 +424,7 @@
         "Mistral",
         "百度"
       ],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://aihubmix.com",
       "op_type": "聚合",
       "is_commercial": false,
@@ -422,6 +440,10 @@
         {
           "date": "2026-11-11",
           "event": "周三巡检：免费模型数 70→71、模型总数 936→961"
+        },
+        {
+          "date": "2026-11-18",
+          "event": "周三巡检：免费模型数 71→76、模型总数 961→973"
         }
       ],
       "status_basis": {
@@ -441,6 +463,13 @@
           "checked_at": "2026-11-11",
           "method": "official_page",
           "note": "免费专区原文：all 71 models on this page；Every model $0/M input & output；Updated 2026-11-10；Every account starts with 10 trial calls；全目录注 961 models",
+          "scope": "free_quota/model_count",
+          "source_url": "https://aihubmix.com/models/free"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_page",
+          "note": "免费专区原文：76 models、Every model $0/M input & output、Updated 2026-11-17；模型页原文：973 models",
           "scope": "free_quota/model_count",
           "source_url": "https://aihubmix.com/models/free"
         }
@@ -570,7 +599,7 @@
         "MiniMax",
         "豆包"
       ],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://302.ai",
       "op_type": "聚合",
       "is_commercial": false,
@@ -703,7 +732,7 @@
       "vendors": [
         "Anthropic"
       ],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://jiekou.ai",
       "op_type": "中转",
       "is_commercial": false,
@@ -821,7 +850,7 @@
         "Qwen",
         "xAI"
       ],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://zenmux.ai",
       "op_type": "聚合",
       "is_commercial": false,
@@ -927,7 +956,7 @@
         "Google",
         "xAI"
       ],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://code28.ccwu.cc",
       "op_type": "聚合",
       "is_commercial": false,
@@ -962,6 +991,13 @@
           "checked_at": "2026-11-11",
           "method": "official_page",
           "note": "官网首页原文：一个入口，连接 461+ AI 模型 / 461+ 支持模型",
+          "scope": "model_count",
+          "source_url": "https://code28.ccwu.cc"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_page",
+          "note": "2026-11-18 未能复核：首页改 JS 单页应用壳、无正文；模型广场接口 /api/user/models 返回 401（需登录）；公开接口 /api/status 不含模型数；站内 461+ 维持不变，下周复核",
           "scope": "model_count",
           "source_url": "https://code28.ccwu.cc"
         }
@@ -1036,7 +1072,7 @@
         "Anthropic",
         "Google"
       ],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://shushutoken.com",
       "op_type": "中转",
       "is_commercial": false,
@@ -1121,7 +1157,7 @@
       "tagline": "收录两百多家中转站的同行导航",
       "type": "导航站",
       "vendors": [],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://tokennav.cc",
       "op_type": "导航站",
       "is_commercial": false,
@@ -1239,7 +1275,7 @@
           "source_url": "https://docs.bigmodel.cn/cn/coding-plan/hangzhou-rules"
         }
       ],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://bigmodel.cn",
       "is_ad": false,
       "ad_start": null,
@@ -1373,7 +1409,7 @@
           "source_url": "https://teamorouter.com/"
         }
       ],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://teamorouter.com",
       "is_ad": false,
       "ad_start": null,
@@ -1417,6 +1453,10 @@
         {
           "date": "2026-11-11",
           "event": "周三巡检：模型数 67→69"
+        },
+        {
+          "date": "2026-11-18",
+          "event": "周三巡检：模型数 69→72"
         }
       ],
       "id": "openmodel",
@@ -1424,7 +1464,7 @@
       "intro": "托管式的多模型 API 网关，一个 Key 接入全部模型，兼容 Anthropic、OpenAI、Gemini 与图像四类协议。官网设有公开价目页（逐模型标价）和活动页，失败请求默认不收费、用量日志可逐条对账。",
       "is_commercial": false,
       "min_topup": null,
-      "model_count": "69（价目页在列）",
+      "model_count": "72（价目页在列）",
       "models_highlight": [
         "Claude Sonnet 4.6",
         "Claude Sonnet 4.5",
@@ -1500,9 +1540,16 @@
           "note": "价目页原文：69 of 69 models；Sonnet 4.6 $1.20/$6.00、Sonnet 4.5 $2.85/$14.25 不变",
           "scope": "model_count",
           "source_url": "https://www.openmodel.ai/model-pricing"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_page",
+          "note": "价目页原文：72 of 72 models；Sonnet 4.6 $1.20/$6.00、Sonnet 4.5 $2.85/$14.25 不变",
+          "scope": "model_count",
+          "source_url": "https://www.openmodel.ai/model-pricing"
         }
       ],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://www.openmodel.ai",
       "is_ad": false,
       "ad_start": null,
@@ -1543,12 +1590,16 @@
       "featured": false,
       "free_quota": {
         "has": true,
-        "text": "注册并完成账号验证即得免费 API 额度（官网 FAQ），无需信用卡；具体金额官网未公示"
+        "text": "注册并完成账号验证即得 $5 API 额度（官网定价区），免费档长期有效，无需信用卡"
       },
       "history": [
         {
           "date": "2026-11-03",
           "event": "本站收录，并完成官方页面核实（免费额度、接口格式、注册要求）"
+        },
+        {
+          "date": "2026-11-18",
+          "event": "周三巡检：免费额度金额补录为 $5（注册验证即得，免费档长期有效）"
         }
       ],
       "id": "freemodel",
@@ -1596,9 +1647,16 @@
           "note": "官网 FAQ 原文：验证账号即得 free API credits、无需信用卡。注：第三方导航免费页曾标此条失效，与官网现行 FAQ 不符，以官方为准收录并在此留痕",
           "scope": "free_quota/api_formats/registration",
           "source_url": "https://freemodel.dev/"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_page",
+          "note": "官网定价区原文：Free … $5 in API credits on signup；FAQ 原文不变：No. Verify your account and you get free API credits to start building immediately.",
+          "scope": "free_quota",
+          "source_url": "https://freemodel.dev"
         }
       ],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://freemodel.dev",
       "is_ad": false,
       "ad_start": null,
@@ -1722,7 +1780,7 @@
           "source_url": "https://longcat.chat/platform/docs/pricing/longcat-2.5"
         }
       ],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://longcat.chat",
       "is_ad": false,
       "ad_start": null,
@@ -1830,9 +1888,16 @@
           "note": "Token Plan 页载明 mimo-v2.5-pro、mimo-v2.5 已于北京时间 2026.10.21 10:00 正式下线；现列旗舰为 mimo-v2.6-pro、mimo-v2.6-flash 等",
           "scope": "models_highlight",
           "source_url": "https://mimo.mi.com/docs/zh-CN/tokenplan"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_docs",
+          "note": "2026-11-18 未能复核：Token Plan 页为 JS 壳，chunk 内含套餐名与 Credits 口径但未见 ¥39 字样，价格疑似接口下发；站内“个人版 Lite ¥39/月起”维持不变，下周复核；MiMo-V2.5/V2.5-Pro 已下线状态与站内一致",
+          "scope": "pricing_model",
+          "source_url": "https://mimo.mi.com/docs/zh-CN/tokenplan"
         }
       ],
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://mimo.mi.com",
       "is_ad": false,
       "ad_start": null,
@@ -1911,7 +1976,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -2043,7 +2108,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -2183,7 +2248,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -2287,7 +2352,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -2417,7 +2482,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -2541,7 +2606,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -2664,7 +2729,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -2785,7 +2850,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -2888,7 +2953,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -3014,7 +3079,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -3133,7 +3198,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -3164,7 +3229,7 @@
       "id": "console-claudeapi-com",
       "pricing_basis": "anchor",
       "name": "ClaudeApi",
-      "website": "https://console.claudeapi.com",
+      "website": "https://console.apito.ai",
       "tagline": "公开定价接口可核，在列 38 个模型",
       "intro": "AI API 中转/聚合服务。本站于 2026-11-03 从其官网公开定价接口逐项核实：在列模型 38 个，覆盖 Anthropic、Google、OpenAI。其余字段（支付、注册、起充）能在官网公开页面核实到的才写入，核实不到的标待核实。",
       "type": "中转/聚合",
@@ -3246,7 +3311,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -3259,12 +3324,23 @@
           "source_url": "https://console.claudeapi.com/api/pricing",
           "method": "official_api",
           "note": "定价接口返回 38 个模型；比价单价经分组倍率换算与量级校验后录入 2 条；支付/注册/起充在公开页面未核实到，保持 null"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_page",
+          "note": "2026-11-11 首次见首页 302 跳转至 console.apito.ai；2026-11-18 复核仍跳转，新站标题仍为 ClaudeAPI；定价接口仍在 console.claudeapi.com/api/pricing，价格未变",
+          "scope": "website",
+          "source_url": "https://console.apito.ai"
         }
       ],
       "history": [
         {
           "date": "2026-11-03",
           "event": "本站收录，并完成官方公开接口核实（价格、模型、接口格式）"
+        },
+        {
+          "date": "2026-11-18",
+          "event": "周三巡检：官网改指新域名 https://console.apito.ai（旧站首页 302 跳转至此，同一服务换域名）"
         }
       ],
       "is_ad": false,
@@ -3374,7 +3450,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -3496,7 +3572,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -3615,7 +3691,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -3690,7 +3766,7 @@
         "deepseek-r1-0528",
         "qwen3.7-max"
       ],
-      "model_count": "155（定价接口在列）",
+      "model_count": "158（定价接口在列）",
       "api_formats": [
         "OpenAI 兼容"
       ],
@@ -3763,7 +3839,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -3776,12 +3852,23 @@
           "source_url": "https://aiberm.com/api/pricing",
           "method": "official_api",
           "note": "定价接口返回 155 个模型；比价单价经分组倍率换算与量级校验后录入 3 条；支付/注册/起充在公开页面未核实到，保持 null"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_api",
+          "note": "定价接口实测 158 个模型（上周 156）；新增 gpt-6.2-astra、gpt-6.2-sol；三价不变",
+          "scope": "model_count",
+          "source_url": "https://aiberm.com/api/pricing"
         }
       ],
       "history": [
         {
           "date": "2026-11-03",
           "event": "本站收录，并完成官方公开接口核实（价格、模型、接口格式）"
+        },
+        {
+          "date": "2026-11-18",
+          "event": "周三巡检：模型数 155→158"
         }
       ],
       "is_ad": false,
@@ -3831,13 +3918,11 @@
         "OpenAI"
       ],
       "models_highlight": [
-        "openai/gpt-oss-20b",
         "gemini-3.5-flash-lite",
         "deepseek/deepseek-v3.2",
-        "qwen/qwen3-coder-next",
-        "z-ai/glm-5.3-flash"
+        "qwen/qwen3-coder-next"
       ],
-      "model_count": "61（定价接口在列）",
+      "model_count": "78（定价接口在列）",
       "api_formats": [
         "OpenAI 兼容"
       ],
@@ -3870,7 +3955,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -3883,12 +3968,23 @@
           "source_url": "https://jiugx.com/api/pricing",
           "method": "official_api",
           "note": "定价接口返回 61 个模型；比价单价经分组倍率换算与量级校验后录入 0 条；支付/注册/起充在公开页面未核实到，保持 null"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_api",
+          "note": "定价接口实测 78 个模型（上周 64）；新增 22 个、移除 8 个，移除含 openai/gpt-oss-20b 与 z-ai/glm-5.3-flash；站内价格条目仍为空",
+          "scope": "model_count/models_highlight",
+          "source_url": "https://jiugx.com/api/pricing"
         }
       ],
       "history": [
         {
           "date": "2026-11-03",
           "event": "本站收录，并完成官方公开接口核实（价格、模型、接口格式）"
+        },
+        {
+          "date": "2026-11-18",
+          "event": "周三巡检：模型数 61→78；models_highlight 剔除已下线模型 openai/gpt-oss-20b、z-ai/glm-5.3-flash"
         }
       ],
       "is_ad": false,
@@ -3930,7 +4026,7 @@
         "deepseek-v4-pro-0813",
         "qwen3.8-flash"
       ],
-      "model_count": "168（定价接口在列）",
+      "model_count": "130（定价接口在列）",
       "api_formats": [
         "OpenAI 兼容"
       ],
@@ -3997,7 +4093,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -4017,6 +4113,20 @@
           "note": "定价接口：模型倍率 0.147、补全倍率 4.0136 未变，default 分组倍率 3.0→4.0；该模型同时在 deepseek-折扣分组（倍率 1.0），站内仍按 default 口径",
           "scope": "prices",
           "source_url": "https://cn.chrouter.com/api/pricing"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_api",
+          "note": "定价接口实测 130 个模型（上周 131）；新增 4 个、移除 5 个；deepseek-v4.1-flash default 分组倍率仍 4.0，换算价 $1.176/$4.72/$0.0236 不变",
+          "scope": "model_count",
+          "source_url": "https://cn.chrouter.com/api/pricing"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_api",
+          "note": "分组价口径变化（站内 default 价不受影响）：deepseek-折扣分组（倍率 1.0）已撤销，新增国产模型-折扣分组（倍率 0.6）；该分组下 deepseek-v4.1-flash 换算价 0.294/1.18/0.0059→0.1764/0.708/0.0035（-40%）；站内不录折扣分组价",
+          "scope": "price_group",
+          "source_url": "https://cn.chrouter.com/api/pricing"
         }
       ],
       "history": [
@@ -4027,6 +4137,10 @@
         {
           "date": "2026-11-11",
           "event": "周三巡检：DeepSeek V4.1 Flash 价格更新为 $1.176/$4.72、缓存 $0.0236（default 分组倍率 3.0→4.0）"
+        },
+        {
+          "date": "2026-11-18",
+          "event": "周三巡检：模型数 168→130"
         }
       ],
       "is_ad": false,
@@ -4082,7 +4196,7 @@
         "deepseek/deepseek-v4.1-flash",
         "qwen3-32b"
       ],
-      "model_count": "76（定价接口在列）",
+      "model_count": "81（定价接口在列）",
       "api_formats": [
         "OpenAI 兼容"
       ],
@@ -4157,7 +4271,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -4177,6 +4291,13 @@
           "note": "定价接口：deepseek/deepseek-v4.1-flash（倍率 0.06、补全 4、缓存 0.02），discount 价 0.12/0.48/0.0024 与站内一致；描述注明工作日峰时 2×",
           "scope": "prices",
           "source_url": "https://clawrouter.com/api/pricing"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_api",
+          "note": "定价接口实测 81 个模型（上周 81）；三价不变；上游名仍为 deepseek/deepseek-v4.1-flash，非高峰价、峰时 2× 口径不变",
+          "scope": "model_count",
+          "source_url": "https://clawrouter.com/api/pricing"
         }
       ],
       "history": [
@@ -4187,6 +4308,10 @@
         {
           "date": "2026-11-11",
           "event": "周三巡检：DeepSeek V4.1 Flash 上游改名 deepseek/deepseek-v4.1-flash，价格 $0.12/$0.48 不变"
+        },
+        {
+          "date": "2026-11-18",
+          "event": "周三巡检：模型数 76→81"
         }
       ],
       "is_ad": false,
@@ -4277,7 +4402,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -4361,7 +4486,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -4447,7 +4572,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -4500,7 +4625,7 @@
         "gpt-6-sol",
         "gemini-auto"
       ],
-      "model_count": "30（定价接口在列）",
+      "model_count": "38（定价接口在列）",
       "api_formats": [
         "OpenAI 兼容"
       ],
@@ -4547,7 +4672,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -4574,6 +4699,13 @@
           "note": "官网首页原文：注册即送约 $0.5 VIP 测试额度 / 自动获得 $0.5 VIP 测试额度 / 免费领取 VIP 测试额度",
           "scope": "free_quota",
           "source_url": "https://apirouter.chat"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_api",
+          "note": "定价接口实测 38 个模型（上周 36）；新增 gpt-6.2-astra、gpt-6.2-sol；Sonnet 4.6 $1.7143/$8.5714 不变；免费额度 $0.5 文案不变",
+          "scope": "model_count",
+          "source_url": "https://apirouter.chat/api/pricing"
         }
       ],
       "history": [
@@ -4588,6 +4720,10 @@
         {
           "date": "2026-11-11",
           "event": "周三巡检：免费额度新增——注册即送约 $0.5 VIP 测试额度"
+        },
+        {
+          "date": "2026-11-18",
+          "event": "周三巡检：模型数 30→38"
         }
       ],
       "is_ad": false,
@@ -4635,7 +4771,7 @@
         "gpt-image-2.5-sunburst",
         "gemini-3.1-flash-lite"
       ],
-      "model_count": "40（定价接口在列）",
+      "model_count": "50（定价接口在列）",
       "api_formats": [
         "OpenAI 兼容"
       ],
@@ -4682,7 +4818,7 @@
       "status": "官网可打开",
       "status_note": "2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）",
       "added_at": "2026-11-03",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "status_basis": {
         "checked_at": "2026-11-03",
         "method": "official_api_reachable",
@@ -4695,12 +4831,23 @@
           "source_url": "https://api000.com/api/pricing",
           "method": "official_api",
           "note": "定价接口返回 40 个模型；比价单价经分组倍率换算与量级校验后录入 1 条；支付/注册/起充在公开页面未核实到，保持 null"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_api",
+          "note": "定价接口实测 50 个模型（上周 49）；新增 nano-banana-2.1-vip；Sonnet 4.6 $1.5/$7.5 不变",
+          "scope": "model_count",
+          "source_url": "https://api000.com/api/pricing"
         }
       ],
       "history": [
         {
           "date": "2026-11-03",
           "event": "本站收录，并完成官方公开接口核实（价格、模型、接口格式）"
+        },
+        {
+          "date": "2026-11-18",
+          "event": "周三巡检：模型数 40→50"
         }
       ],
       "is_ad": false,
@@ -4812,7 +4959,7 @@
         }
       ],
       "verification_status": "verified",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://platform.deepseek.com",
       "ad_start": null,
       "ad_end": null,
@@ -4832,6 +4979,10 @@
         {
           "date": "2026-11-11",
           "event": "扩面首批核查通过，旗舰 GPT-6 系列价格按官方定价页逐项核实"
+        },
+        {
+          "date": "2026-11-18",
+          "event": "周三巡检：新增 GPT-6.2 Astra、GPT-6.2 Sol、GPT-6 Sol 三行标准价；prices_note 修正（GPT-5.6 已出现，站内未录行）"
         }
       ],
       "id": "openai-api",
@@ -4893,9 +5044,42 @@
           "output": 0.5,
           "price_source_url": "https://platform.openai.com/docs/pricing",
           "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": 0.4,
+          "currency": "USD",
+          "input": 8,
+          "model_id": "gpt-6.2-astra",
+          "model_label": "GPT-6.2 Astra",
+          "note": "官方定价页标准价",
+          "output": 40,
+          "price_source_url": "https://platform.openai.com/docs/pricing",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": 0.1,
+          "currency": "USD",
+          "input": 2,
+          "model_id": "gpt-6.2-sol",
+          "model_label": "GPT-6.2 Sol",
+          "note": "官方定价页标准价",
+          "output": 10,
+          "price_source_url": "https://platform.openai.com/docs/pricing",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": 0.2,
+          "currency": "USD",
+          "input": 2,
+          "model_id": "gpt-6-sol",
+          "model_label": "GPT-6 Sol",
+          "note": "官方定价页标准价",
+          "output": 10,
+          "price_source_url": "https://platform.openai.com/docs/pricing",
+          "unit": "每 1M tokens"
         }
       ],
-      "prices_note": "GPT-5.x 系列各行未在本次抓取的官方定价页文本中出现，记待核实，不代入第三方数字；区域处理端点对 2026-03-05 后发布的模型加收 10%。",
+      "prices_note": "GPT-5.6 系列现已在官方定价页出现（Sol 为促销价，有效期至 2026-11-30），站内未录行；区域处理端点对 2026-03-05 后发布的模型加收 10%。",
       "pricing_model": "按量付费（预付费，按每 1M tokens 计价）",
       "pros": [
         {
@@ -4926,10 +5110,17 @@
           "note": "GPT-6.1 Sol $2/$10、GPT-6.1 Terra $1/$5、GPT-6 Astra $10/$50、GPT-6 Luna $0.10/$0.50（每 1M tokens，输入/输出）；缓存输入分别为 $0.10/$0.05/$1.00/$0.01",
           "scope": "prices",
           "source_url": "https://platform.openai.com/docs/pricing"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_docs",
+          "note": "官方定价页内嵌 Standard 表（主代理独立复核）：gpt-6.2-astra [8, 0.4, 10, 40]、gpt-6.2-sol [2, 0.1, 2.5, 10]、gpt-6-sol [2, 0.2, 2.5, 10]；GPT-5.6 三行同页在列（Sol 促销价至 2026-11-30），上一代未录行；既有 4 行不变",
+          "scope": "prices/prices_note",
+          "source_url": "https://platform.openai.com/docs/pricing"
         }
       ],
       "verification_status": "verified",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://platform.openai.com",
       "ad_start": null,
       "ad_end": null,
@@ -5073,7 +5264,7 @@
         }
       ],
       "verification_status": "verified",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://platform.claude.com",
       "ad_start": null,
       "ad_end": null,
@@ -5210,7 +5401,7 @@
         }
       ],
       "verification_status": "verified",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://console.groq.com",
       "ad_start": null,
       "ad_end": null,
@@ -5374,7 +5565,7 @@
         }
       ],
       "verification_status": "verified",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://together.ai",
       "ad_start": null,
       "ad_end": null,
@@ -5520,11 +5711,530 @@
         }
       ],
       "verification_status": "verified",
-      "verified_at": "2026-11-11",
+      "verified_at": "2026-11-18",
       "website": "https://platform.kimi.com",
       "ad_start": null,
       "ad_end": null,
       "claimed": false
+    },
+    {
+      "added_at": "2026-11-18",
+      "ad_end": null,
+      "ad_start": null,
+      "api_formats": [
+        "OpenAI 兼容",
+        "Anthropic 兼容",
+        "Gemini"
+      ],
+      "categories": [
+        "claude",
+        "openai",
+        "gemini",
+        "aggregator"
+      ],
+      "claimed": false,
+      "cons": [
+        {
+          "basis": "官方模型页",
+          "text": "Kimi K3.1 Pro 价高于 Moonshot 官方价 $2/$10（输入 +4.39%、输出 +9.21%），换算锚点未在公开页面说明"
+        },
+        {
+          "basis": "官方文档",
+          "text": "API Key 需首次充值后激活；公开页面未见注册赠金"
+        },
+        {
+          "basis": "官方首页",
+          "text": "部分模型价为 from 最低价，实际按服务供应商价结算，不同供应商价格可能不同"
+        }
+      ],
+      "featured": false,
+      "free_kinds": null,
+      "free_quota": {
+        "has": false,
+        "text": "未见注册赠金；免费测试模型 ohmygpt/mock 可免费调用（仅用于连通性测试）；失败请求不计费。"
+      },
+      "history": [
+        {
+          "date": "2026-11-18",
+          "event": "扩面第二批核查通过，价格按官方页面逐项核实"
+        }
+      ],
+      "id": "ohmygpt",
+      "intro": "多供应商聚合网关，一个 Key 调用 305 个模型，原生支持 OpenAI、Anthropic 与 Gemini 三种协议；同模型多供应商自动路由与故障转移，TEE 收据注明实际服务供应商，按供应商实报用量计费。",
+      "is_ad": false,
+      "is_commercial": false,
+      "min_topup": null,
+      "model_count": "305（官网在列）",
+      "models_highlight": [
+        "Kimi K3.1 Pro",
+        "Claude Fable 5.2",
+        "Gemini 4 Carbon",
+        "GPT-6 Astra",
+        "Qwen4 Max"
+      ],
+      "name": "OhMyGPT",
+      "op_type": "聚合",
+      "payments": [
+        "信用卡",
+        "支付宝"
+      ],
+      "price_consistency": null,
+      "price_group_status": null,
+      "price_ratio": null,
+      "prices": [
+        {
+          "cache_read": 0.20878,
+          "currency": "USD",
+          "input": 2.0878,
+          "model_id": "kimi-k3.1-pro",
+          "model_label": "Kimi K3.1 Pro",
+          "note": "双供应商（Moonshot AI、Tencent Cloud TokenHub）同价；Auto 按最低健康供应商计费",
+          "output": 10.9208,
+          "price_source_url": "https://ohmygpt.com/models/moonshot/kimi-k3.1-pro",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 8.8,
+          "model_id": "claude-fable-5-2",
+          "model_label": "Claude Fable 5.2",
+          "note": "from $X：多供应商最低价，实收为服务供应商价；未标 list 价",
+          "output": 44.0,
+          "price_source_url": "https://ohmygpt.com",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 1.8,
+          "model_id": "gemini-4-carbon",
+          "model_label": "Gemini 4 Carbon",
+          "note": "from $X；list $2.00/$10.00",
+          "output": 9.0,
+          "price_source_url": "https://ohmygpt.com",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 9.0,
+          "model_id": "gpt-6-astra",
+          "model_label": "GPT-6 Astra",
+          "note": "from $X；list $10.00/$50.00",
+          "output": 45.0,
+          "price_source_url": "https://ohmygpt.com",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 7.2,
+          "model_id": "gpt-6.2-astra",
+          "model_label": "GPT-6.2 Astra",
+          "note": "from $X；list $8.00/$40.00",
+          "output": 36.0,
+          "price_source_url": "https://ohmygpt.com",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 1.413,
+          "model_id": "qwen4-max",
+          "model_label": "Qwen4 Max",
+          "note": "首页价",
+          "output": 4.24,
+          "price_source_url": "https://ohmygpt.com",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 0.0365,
+          "model_id": "tencent-hy4-flash",
+          "model_label": "Tencent Hy4 Flash",
+          "note": "首页价",
+          "output": 0.146,
+          "price_source_url": "https://ohmygpt.com",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 0.024092,
+          "model_id": "glm-4.6v-flashx",
+          "model_label": "GLM-4.6V-FlashX",
+          "note": "首页最低价表",
+          "output": 0.2409,
+          "price_source_url": "https://ohmygpt.com",
+          "unit": "每 1M tokens"
+        }
+      ],
+      "prices_note": "Kimi K3.1 Pro 另有缓存写入价：5min $2.0878、1h $4.1756（模型页）。Kimi 价高于 Moonshot 官方价 $2/$10，换算锚点在 OhMyGPT 公开页面未见说明；站内价即录 OhMyGPT 价。支付方式官网称“Pay by card, Alipay and more”，除卡与支付宝外其他方式未列明；最低充值金额未见，记待核实。",
+      "pricing_basis": null,
+      "pricing_model": "按量付费；同模型多供应商取最低价（from $X），挂牌价 list $Y 另标；1 USD = 250,000 Credits；按服务供应商实报用量计费，失败请求不计费",
+      "pros": [
+        {
+          "basis": "官方模型页",
+          "text": "逐模型供应商列表公开（供应商名与各自单价），用户可自选、排除或锁定供应商"
+        },
+        {
+          "basis": "官方文档",
+          "text": "TEE 证明收据注明实际服务供应商；每请求可凭 X-Request-ID 查收据与费用明细"
+        },
+        {
+          "basis": "官方文档",
+          "text": "失败请求不计费；余额不足时自动降额不断连（402 除外）"
+        }
+      ],
+      "recommend_reason": null,
+      "recommended": false,
+      "registration": "开放注册；API Key 在首次充值后激活（官方 Quickstart 原文）",
+      "source_url": "https://ohmygpt.com",
+      "status": "官网可打开",
+      "status_basis": {
+        "checked_at": "2026-11-18",
+        "method": "homepage_reachable",
+        "note": "2026-11-18 核实时官网首页与模型页、文档页均可正常打开"
+      },
+      "status_note": "2026-11-18 核实时官网与定价页、模型页、文档页均可正常打开",
+      "tagline": "305 个模型一站聚合，按供应商价计费、可自选路由",
+      "type": "中转/聚合",
+      "vendors": [
+        "Anthropic",
+        "OpenAI",
+        "Google",
+        "Moonshot",
+        "DeepSeek",
+        "Qwen",
+        "Z.ai",
+        "xAI",
+        "MiniMax",
+        "Tencent",
+        "ByteDance",
+        "Cohere"
+      ],
+      "verification_log": [
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_page",
+          "note": "首页逐模型价：GPT-6.2 Astra from $7.20/$36.00（list $8/$40）、GPT-6 Astra from $9.00/$45.00（list $10/$50）、Gemini 4 Carbon from $1.80/$9.00（list $2/$10）、Claude Fable 5.2 from $8.80/$44.00、Kimi K3.1 Pro $2.0878/$10.9208、Qwen4 Max $1.413/$4.24、Hy4 Flash $0.0365/$0.146",
+          "scope": "prices",
+          "source_url": "https://ohmygpt.com"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_page",
+          "note": "Kimi K3.1 Pro 模型页：供应商 Moonshot AI 与 Tencent Cloud TokenHub 同价 $2.0878/$10.9208，缓存读 $0.20878；Auto 按最低健康供应商计费，实收为服务供应商价",
+          "scope": "prices/provider_routing",
+          "source_url": "https://ohmygpt.com/models/moonshot/kimi-k3.1-pro"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_docs",
+          "note": "Provider Routing 文档：逐模型供应商列表、路由字段与 TEE 证明机制；Costs 文档：1 USD = 250,000 Credits，失败请求不计费",
+          "scope": "provider_routing/costs",
+          "source_url": "https://ohmygpt.com/docs/provider-routing"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_docs",
+          "note": "ToS 运营方 DogeNet LLC，模型由第三方提供，ToS 将未授权使用私有 API 列为封号情形；Quickstart：免费测试模型 ohmygpt/mock，Key 需首次充值后激活；首页支付为卡、支付宝及更多",
+          "scope": "entity/registration/free_quota/payments",
+          "source_url": "https://ohmygpt.com/tos"
+        }
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-11-18",
+      "website": "https://ohmygpt.com",
+      "field_sources": null
+    },
+    {
+      "added_at": "2026-11-18",
+      "ad_end": null,
+      "ad_start": null,
+      "api_formats": [
+        "OpenAI 兼容",
+        "Anthropic 兼容",
+        "Gemini"
+      ],
+      "categories": [
+        "claude",
+        "openai",
+        "gemini",
+        "aggregator",
+        "lowcost"
+      ],
+      "claimed": false,
+      "cons": [
+        {
+          "basis": "官方定价页",
+          "text": "价目表另有 Current price 列（约为 Gold 价 95%），其口径在公开页面未明"
+        },
+        {
+          "basis": "官方模型页",
+          "text": "渠道路由表述在 Claude 系列页明确写路由至 Anthropic 官方 API，Gemini/GPT 系列页未见同等表述"
+        },
+        {
+          "basis": "官方定价页",
+          "text": "最低充值金额未见，记待核实"
+        }
+      ],
+      "featured": false,
+      "free_kinds": null,
+      "free_quota": {
+        "has": false,
+        "text": "模型页 FAQ 明确 Claude API 与 GPT API 均不提供免费额度；注册账号免费，无赠金。"
+      },
+      "history": [
+        {
+          "date": "2026-11-18",
+          "event": "扩面第二批补核通过，价格按官方定价页逐项核实"
+        }
+      ],
+      "id": "apimart",
+      "intro": "新加坡 APIMART PTE. LTD. 运营的统一 AI API 网关，一个 Key 调用 190+ 模型；Gold 会员价为官网价 8 折，另有 Platinum/Diamond 会员档；按量付费，仅成功请求计费。",
+      "is_ad": false,
+      "is_commercial": false,
+      "min_topup": null,
+      "model_count": "190+（官网在列）",
+      "models_highlight": [
+        "Claude Opus 5.5",
+        "Claude Fable 5.1",
+        "GPT-6 系列",
+        "Gemini 4 系列",
+        "Kimi K3"
+      ],
+      "name": "APIMart",
+      "op_type": "聚合",
+      "payments": [
+        "Visa",
+        "Mastercard",
+        "Google Pay",
+        "Apple Pay",
+        "支付宝",
+        "微信支付",
+        "PayPal",
+        "加密货币"
+      ],
+      "price_consistency": null,
+      "price_group_status": null,
+      "price_ratio": {
+        "claude-sonnet-5-5": {
+          "input_ratio": 0.8,
+          "output_ratio": 0.8,
+          "ratio": 0.8
+        }
+      },
+      "price_tier": "略低",
+      "prices": [
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 4.0,
+          "model_id": "claude-opus-5",
+          "model_label": "Claude Opus 5",
+          "note": "Gold 价；官方价 $5/$25",
+          "output": 20.0,
+          "price_source_url": "https://apimart.ai/pricing",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 3.2,
+          "model_id": "claude-opus-5-5",
+          "model_label": "Claude Opus 5.5",
+          "note": "Gold 价；官方价 $4/$20",
+          "output": 16.0,
+          "price_source_url": "https://apimart.ai/pricing",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 1.6,
+          "model_id": "claude-sonnet-5-5",
+          "model_label": "Claude Sonnet 5.5",
+          "note": "Gold 价；官方价 $2/$10",
+          "output": 8.0,
+          "price_source_url": "https://apimart.ai/pricing",
+          "unit": "每 1M tokens",
+          "price_group": "default",
+          "group_price": false
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 0.08,
+          "model_id": "claude-haiku-5-5",
+          "model_label": "Claude Haiku 5.5",
+          "note": "Gold 价（≤100K 输入档）；分层计价，输入超 100K 另档",
+          "output": 0.4,
+          "price_source_url": "https://apimart.ai/pricing",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 8.0,
+          "model_id": "claude-fable-5-1",
+          "model_label": "Claude Fable 5.1",
+          "note": "Gold 价；官方价 $10/$50",
+          "output": 40.0,
+          "price_source_url": "https://apimart.ai/pricing",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 2.4,
+          "model_id": "kimi-k3",
+          "model_label": "Kimi K3",
+          "note": "Gold 价；官方价 $3/$15",
+          "output": 12.0,
+          "price_source_url": "https://apimart.ai/pricing",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 1.4858,
+          "model_id": "kimi-k2.7-code-highspeed",
+          "model_label": "Kimi K2.7 Code Highspeed",
+          "note": "Gold 价",
+          "output": 6.1659,
+          "price_source_url": "https://apimart.ai/pricing",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 1.2,
+          "model_id": "gemini-4-hydrogen",
+          "model_label": "Gemini 4 Hydrogen",
+          "note": "Gold 价",
+          "output": 6.0,
+          "price_source_url": "https://apimart.ai/pricing",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 1.6,
+          "model_id": "gemini-4-argon",
+          "model_label": "Gemini 4 Argon",
+          "note": "Gold 价",
+          "output": 8.0,
+          "price_source_url": "https://apimart.ai/pricing",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 0.24,
+          "model_id": "minimax-m2.7",
+          "model_label": "MiniMax M2.7",
+          "note": "Gold 价",
+          "output": 0.96,
+          "price_source_url": "https://apimart.ai/pricing",
+          "unit": "每 1M tokens"
+        },
+        {
+          "cache_read": null,
+          "currency": "USD",
+          "input": 0.8,
+          "model_id": "grok-build-0.1",
+          "model_label": "Grok Build 0.1",
+          "note": "Gold 价",
+          "output": 1.6,
+          "price_source_url": "https://apimart.ai/pricing",
+          "unit": "每 1M tokens"
+        }
+      ],
+      "prices_note": "价目表另有 Current price 列（约为 Gold 价 95%），口径未明；Platinum/Diamond 会员价另计，站内仅录 Gold 价。Haiku 5.5 等分层模型按输入长度分档计价。",
+      "pricing_basis": "anchor",
+      "pricing_model": "按量付费，积分计费（1 Credit ≈ $0.10）；Gold 会员价为官网价 8 折，Platinum/Diamond 更低（最高 28% off）；仅成功请求计费；无订阅费、无充值手续费",
+      "pros": [
+        {
+          "basis": "官方 About 与 Terms",
+          "text": "主体为新加坡注册公司 APIMART PTE. LTD.，UEN 202634430G 与注册地址双重明文"
+        },
+        {
+          "basis": "官方定价页与模型页",
+          "text": "Gold 价一律为官方价 8 折，每模型附 Official 价锚点，可逐项核对"
+        },
+        {
+          "basis": "官方模型页",
+          "text": "Claude 系列页明文路由至 Anthropic 官方 API，模型行为与官方一致、仅价格不同"
+        },
+        {
+          "basis": "官方 FAQ",
+          "text": "支付方式完整列明；仅成功请求计费"
+        }
+      ],
+      "recommend_reason": null,
+      "recommended": false,
+      "registration": "开放注册；注册免费，充值后在控制台开 Key",
+      "source_url": "https://apimart.ai/pricing",
+      "status": "官网可打开",
+      "status_basis": {
+        "checked_at": "2026-11-18",
+        "method": "homepage_reachable",
+        "note": "2026-11-18 核实时官网首页、定价页、About 页、模型详情页均可正常打开"
+      },
+      "status_note": "2026-11-18 核实时官网与定价页、模型页均可正常打开",
+      "tagline": "190+ 模型统一网关，Gold 会员价官网 8 折",
+      "type": "中转/聚合",
+      "vendors": [
+        "Anthropic",
+        "OpenAI",
+        "Google",
+        "Moonshot",
+        "MiniMax",
+        "Qwen",
+        "xAI",
+        "ByteDance",
+        "Z.ai",
+        "Kling",
+        "DeepSeek",
+        "Mistral"
+      ],
+      "verification_log": [
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_page",
+          "note": "定价页 LLM 表 159 模型逐项标价（Gold 价）：Opus 5 $4/$20、Opus 5.5 $3.2/$16、Sonnet 5.5 $1.6/$8、Haiku 5.5 $0.08/$0.4、Fable 5.1 $8/$40、Kimi K3 $2.4/$12、Gemini 4 Hydrogen $1.2/$6；首页同值交叉一致",
+          "scope": "prices",
+          "source_url": "https://apimart.ai/pricing"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_page",
+          "note": "Claude 模型页：Gold 价与 Official 价并列，Fable 5.1 官方 $10/$50、Opus 5.5 官方 $4/$20、Sonnet 5.5 官方 $2/$10；两次明文路由至 Anthropic 官方 API；FAQ 明确 Claude/GPT API 无免费额度",
+          "scope": "prices/channel/free_quota",
+          "source_url": "https://apimart.ai/model/llm/claude?id=claude-opus-5"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_page",
+          "note": "About 页：APIMART PTE. LTD.，新加坡注册，UEN 202634430G，注册地址 9 RAFFLES PLACE, #06-00, REPUBLIC PLAZA, SINGAPORE 048619，成立 2026-07-29；Terms 页同述并以新加坡法律为准据法",
+          "scope": "entity",
+          "source_url": "https://apimart.ai/about"
+        },
+        {
+          "checked_at": "2026-11-18",
+          "method": "official_page",
+          "note": "支付方式：Antom（Visa/Mastercard/Alipay）、Crypto、PayPal、Creem（首页 FAQ）；Visa/Mastercard、Google Pay、Apple Pay、Alipay、WeChat Pay、加密货币（模型页 FAQ）；无订阅费、无充值手续费",
+          "scope": "payments",
+          "source_url": "https://apimart.ai"
+        }
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-11-18",
+      "website": "https://apimart.ai",
+      "field_sources": null
     }
   ]
 }

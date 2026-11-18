@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://aivaro.site/</loc><lastmod>2026-11-04</lastmod></url>
-  <url><loc>https://aivaro.site/directory.html</loc><lastmod>2026-11-11</lastmod></url>
-  <url><loc>https://aivaro.site/compare.html</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://aivaro.site/directory.html</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://aivaro.site/compare.html</loc><lastmod>2026-11-18</lastmod></url>
   <url><loc>https://aivaro.site/free.html</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://aivaro.site/about.html</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://aivaro.site/submit.html</loc><lastmod>2026-11-04</lastmod></url>
@@ -53,4 +53,6 @@
   <url><loc>https://aivaro.site/detail/groqcloud.html</loc><lastmod>2026-11-18</lastmod></url>
   <url><loc>https://aivaro.site/detail/together-ai.html</loc><lastmod>2026-11-18</lastmod></url>
   <url><loc>https://aivaro.site/detail/moonshot-kimi.html</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://aivaro.site/detail/ohmygpt.html</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://aivaro.site/detail/apimart.html</loc><lastmod>2026-11-18</lastmod></url>
 </urlset>
