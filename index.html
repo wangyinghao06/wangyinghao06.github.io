@@ -170,7 +170,7 @@
 
   const latest = services.slice().sort((a, b) => b.added_at.localeCompare(a.added_at)).slice(0, 5);
   document.getElementById('latestList').innerHTML = latest.map(s =>
-    '<a href="detail.html?id=' + encodeURIComponent(s.id) + '"><time datetime="' + esc(s.added_at) + '">' + esc(s.added_at) + '</time>' +
+    '<a href="detail/' + encodeURIComponent(s.id) + '.html' + '"><time datetime="' + esc(s.added_at) + '">' + esc(s.added_at) + '</time>' +
     '<span><strong>' + esc(s.name) + '</strong> · ' + esc(s.tagline) + '</span>' +
     (newIds.has(s.id) ? '<span class="badge new">NEW</span>' : '') +
     '<span class="lt">' + esc(s.status) + '</span></a>'

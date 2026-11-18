@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
+<title>小米 MiMo 开放平台 · Aivaro 导航</title>
+<meta name="description" content="小米自研模型官方平台，订阅与按量并行">
+<link rel="canonical" href="https://aivaro.site/detail/xiaomi-mimo.html">
+<meta property="og:title" content="小米 MiMo 开放平台 · Aivaro 导航">
+<meta property="og:description" content="小米自研模型官方平台，订阅与按量并行">
+<meta property="og:url" content="https://aivaro.site/detail/xiaomi-mimo.html">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/brand-icon-32.png">
+<link rel="stylesheet" href="assets/theme.css">
+<script>/* 主题初始化（渲染前执行，避免闪烁）：localStorage 偏好优先，缺省跟随系统 */
+(function(){try{var p=localStorage.getItem('aivaro-theme')||'auto';var d=p==='dark'||(p==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.theme=d?'dark':'light';document.documentElement.dataset.pref=p;}catch(e){document.documentElement.dataset.theme='light';document.documentElement.dataset.pref='auto';}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html"><span class="brand-tile"><img src="assets/brand-icon.png" alt="Aivaro 品牌图标"></span>Aivaro<small>中转站导航</small></a>
+    <nav class="seg-nav" id="segNav" aria-label="主导航">
+      <a href="index.html" data-nav="index">首页</a>
+      <a href="directory.html" data-nav="directory">目录</a>
+      <a href="free.html" data-nav="free">免费</a>
+      <a href="compare.html" data-nav="compare">比价</a>
+      <a href="about.html" data-nav="about">关于</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="search-btn" id="searchBtn" aria-label="全站搜索，快捷键 Command 加 K">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+        <span class="sb-label">搜索服务 / 模型</span><kbd>⌘K</kbd>
+      </button>
+      <button class="theme-btn" id="themeBtn" aria-label="主题切换" title="主题：跟随系统">
+        <svg class="ic-auto" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor" stroke="none"/></svg>
+        <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="打开导航菜单" aria-expanded="false" aria-controls="navSheet">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="sheet" id="navSheet" aria-label="站点导航">
+    <a href="index.html">首页 <span>›</span></a>
+    <a href="directory.html">服务目录 <span>›</span></a>
+    <a href="compare.html">价格对比 <span>›</span></a>
+    <a href="free.html">免费额度 <span>›</span></a>
+    <a href="about.html">收录规范与关于 <span>›</span></a>
+    <a href="submit.html">投稿收录 <span>›</span></a>
+    <a href="advertise.html">广告合作 <span>›</span></a>
+    <hr>
+    <div class="sheet-h">分类</div>
+    <a href="directory.html?cat=free">免费 AI API</a>
+    <a href="directory.html?cat=lowcost">低价 AI API</a>
+    <a href="directory.html?cat=claude">Claude 中转</a>
+    <a href="directory.html?cat=openai">OpenAI 中转</a>
+    <a href="directory.html?cat=gemini">Gemini 中转</a>
+    <a href="directory.html?cat=aggregator">多模型聚合</a>
+    <a href="directory.html?cat=tools">开发工具与资源</a>
+  </nav>
+</header>
+<main class="wrap" id="detailMain">
+  <p style="padding:30px 0"><a href="directory.html">← 返回服务目录</a></p>
+  <div id="detailBody"><div class="detail-h"><div class="detail-top"><span class="logo-tile has-icon" aria-hidden="true"><span class="logo-letter">小</span><img class="logo-img" src="data:image/png;base64,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" alt="" loading="lazy"></span><div class="detail-tt"><h1>小米 MiMo 开放平台</h1><p class="tag">小米自研模型官方平台，订阅与按量并行</p></div></div><div class="chips" style="margin-top:12px"><span class="chip">官方平台</span><span class="chip grey">状态：官网可打开</span></div><p style="margin-top:18px"><a class="btn" href="go.html?id=xiaomi-mimo" target="_blank" rel="noopener">访问官网 ↗</a></p><p class="leave-note">点击将离开 Aivaro，前往该服务商的官网（第三方站点）。Aivaro 与该服务无运营关系，注册与付费请在对方站点自行核对条款。</p></div><div class="metrics"><div class="m"><h4>起充金额</h4><div>待核实</div></div><div class="m"><h4>已核实最低输入价</h4><div>待核实</div></div><div class="m"><h4>服务状态</h4><div>官网可打开</div></div><div class="m"><h4>最近核实</h4><div>2026-11-11</div></div></div><section class="blk"><div class="blk-h"><h2>介绍</h2></div><p style="max-width:760px">小米自研 MiMo 大模型的官方 API 开放平台，提供按量付费与面向编程场景的 Token Plan 订阅两种计费。其编程工具 MiMo Code 曾内置限时免费通道，官方更新日志载明该免费试用已于 2026 年 7 月结束。</p></section><section class="blk"><div class="blk-h"><h2>价格（已核实部分）</h2><span>逐条可回官方页面复核</span></div><p>逐模型价格：<span class="unknown">待核实</span></p><p class="note">其 Token Plan 以 Credits 计量、按量价目在官方文档的价格页，本轮以订阅口径记录，未逐项换算逐模型 token 单价，故单价标待核实。</p></section><section class="blk"><div class="blk-h"><h2>支持模型（已核实范围）</h2></div><div class="chips" style="margin-bottom:10px"><span class="chip grey">MiMo-V2.6 Pro</span></div><p class="note" style="margin:0">覆盖厂商：小米 MiMo。以上为本站在其官方页面已核实到的标价与主打模型，全量清单以官网模型页为准。</p></section><section class="blk"><div class="blk-h"><h2>支付、额度与接入</h2></div><div class="kv"><div class="cell"><h4>支付方式</h4><div>小米支付、支付宝、微信支付、Apple Pay、Google Pay、信用卡/借记卡</div></div><div class="cell"><h4>免费额度</h4><div>无（官网未提供免费层）</div></div><div class="cell"><h4>注册要求</h4><div>开放注册（小米账号）</div></div><div class="cell"><h4>计费模式</h4><div>Token Plan 订阅（个人版 Lite ¥39/月起，按 Credits 计量）＋API 按量付费</div></div><div class="cell"><h4>API 兼容格式</h4><div><span class="unknown">待核实</span></div></div><div class="cell"><h4>模型规模</h4><div><span class="unknown">待核实</span></div></div><div class="cell"><h4>支持厂商</h4><div>小米 MiMo</div></div><div class="cell"><h4>主打模型</h4><div>MiMo-V2.6 Pro</div></div><div class="cell"><h4>服务状态备注</h4><div>2026-11-03 核实时官方文档站可正常打开</div></div></div></section><section class="blk"><div class="blk-h"><h2>值得注意的优点</h2></div><ul class="pc-list"><li>订阅档位、Credits 折算与充值方式全部写在官方文档里 <span class="basis">（依据：官方文档）</span></li><li>充值渠道齐全：大陆用户可用小米支付/支付宝/微信，海外可用 Apple Pay、Google Pay 与银行卡 <span class="basis">（依据：官方公告）</span></li></ul></section><section class="blk"><div class="blk-h"><h2>需要留意的短板</h2></div><ul class="pc-list"><li>MiMo Code 内置的 MiMo-V2.5 免费试用已于 2026 年 7 月 26 日结束，别再按免费渠道预期它 <span class="basis">（依据：官方更新日志）</span></li><li>Token Plan 用 Credits 计量而非 token 单价，与按量站点的比价口径不同 <span class="basis">（依据：官方文档）</span></li></ul></section><section class="blk"><div class="blk-h"><h2>状态口径说明</h2></div><p style="max-width:760px">本站的服务状态来自<strong>核实日对其官网的人工访问结论</strong>（如「官网可打开」），不做可用性百分比探测，也不代表其 API 网关的实时可用性、模型真实性或计费准确性。部分同行导航会做无凭证自动探测并给出可用性数值，本站在没有持续探测样本之前不发布此类数字，以免给出无法负责的精度。状态如有官方公告变更，我们会在复核时更新并记入下方时间线。</p><p style="max-width:760px"><strong>「官网可打开」仅代表核实当天该官网可正常打开，不代表服务质量、稳定性或资金安全。</strong></p><div style="max-width:760px"><div class="segbar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div><div class="segbar-cap">信息完整度 3/7（已核实字段占比，非可用性探测）</div></div></section><section class="blk"><div class="blk-h"><h2>来源与核实</h2></div><div class="src-box"><div>数据来源：<a href="https://mimo.mi.com/docs/zh-CN/tokenplan" target="_blank" rel="noopener noreferrer">https://mimo.mi.com/docs/zh-CN/tokenplan</a></div><div>最近核实时间：2026-11-11（只读访问其官方页面）</div><div>本站收录日期：2026-11-03</div><div style="margin-top:6px;color:var(--ink-3)">字段标「待核实」表示本轮未在其官方页面查到，未采用任何第三方数据填充。发现信息有误，可通过官网核对后反馈给我们更正。</div></div><h3 style="font-size:15px;margin:20px 0 4px">核实记录</h3><ul class="timeline"><li><time datetime="2026-11-11">2026-11-11</time><div><span class="src-type">官方文档核实</span>周三巡检：models_highlight 去掉已下线 MiMo-V2.5（2026-10-21 下线）</div></li><li><time datetime="2026-11-03">2026-11-03</time><div><span class="src-type">官方文档核实</span>本站收录，并完成官方页面核实（套餐、支付方式、免费试用结束状态）</div></li></ul></section><section class="blk"><div class="blk-h"><h2>同类服务</h2><span>按共同模型自动匹配</span></div><div class="rel-grid"><div class="rel-card"><h3><a href="detail/api-holdai-top.html">毫秒 API</a></h3><p>公开定价接口可核，在列 703 个模型</p><div class="why">共同点：同覆盖 其他 等模型家族</div></div><div class="rel-card"><h3><a href="detail/jiugx-com.html">九哥API</a></h3><p>公开定价接口可核，在列 61 个模型</p><div class="why">共同点：同覆盖 其他 等模型家族</div></div><div class="rel-card"><h3><a href="detail/longcat.html">美团 LongCat</a></h3><p>美团自研大模型开放平台，每日免费额度</p><p>已核实最低输入价 <strong>$0.3</strong> / 1M</p><div class="why">共同点：同覆盖 其他 等模型家族</div></div><div class="rel-card"><h3><a href="detail/aihubmix.html">AiHubMix（推理时代）</a></h3><p>九百多个模型的大聚合，带免费模型区</p><div class="why">共同点：同覆盖 其他 等模型家族</div></div><div class="rel-card"><h3><a href="detail/api-xty-app.html">api.xty.app</a></h3><p>公开定价接口可核，在列 439 个模型</p><p>已核实最低输入价 <strong>$0.3</strong> / 1M</p><div class="why">共同点：同覆盖 其他 等模型家族</div></div><div class="rel-card"><h3><a href="detail/groqcloud.html">GroqCloud</a></h3><p>Groq LPU 推理云，托管开源模型按量计费</p><p>已核实最低输入价 <strong>$0.075</strong> / 1M</p><div class="why">共同点：同覆盖 其他 等模型家族</div></div></div><p class="note">按共同覆盖的厂商与模型家族自动匹配，排列不构成推荐。</p></section></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="index.html">首页</a><a href="directory.html">服务目录</a><a href="compare.html">价格对比</a><a href="free.html">免费额度</a><a href="about.html">收录规范与关于</a><a href="submit.html">投稿收录</a><a href="advertise.html">广告合作</a><a href="privacy.html">隐私政策</a>
+    </nav>
+    <div class="sub-box" id="subBox" hidden>
+      <form id="subForm" novalidate>
+        <div class="sub-h">订阅本站更新</div>
+        <div class="sub-row">
+          <input type="email" id="subEmail" placeholder="邮箱地址" autocomplete="email" aria-label="订阅邮箱">
+          <button class="btn sm" type="submit">订阅</button>
+        </div>
+        <label class="sub-consent"><input type="checkbox" id="subConsent"> <span>我已阅读并同意<a href="privacy.html">隐私政策</a></span></label>
+        <p class="sub-msg" id="subMsg" role="status"></p>
+        <p class="sub-note">退订方式：回复任意一封订阅邮件注明「退订」，或经<a href="about.html#contact">关于页邮箱</a>联系我们删除你的邮箱。</p>
+      </form>
+    </div>
+    <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，收录并核实公开服务信息，提供服务发现、比较与官网导航。本站与本页介绍的第三方服务<strong>没有运营、代理或隶属关系</strong>；点「访问官网」将离开本站，注册、充值与使用均发生在第三方站点，请自行核对条款。</p>
+    <p class="disclaimer">本站仅提供网址信息整理与导航，不提供网络代理、跨境访问或 API 转发服务；站内所列第三方服务均由其运营者负责，本站不对其合规性、可用性与价格作保证；使用任何第三方服务前，请自行核实其资质与条款，并遵守所在地法律法规。</p>
+    <p>Aivaro 导航 · 数据核实于 2026-11-03 · 页面由 data/services.json 驱动渲染</p>
+  </div>
+</footer>
+
+<script src="assets/analytics.js"></script>
+<script src="assets/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
+<title>智谱 BigModel · Aivaro 导航</title>
+<meta name="description" content="GLM 官方平台，附杭州 Coding 减免活动">
+<link rel="canonical" href="https://aivaro.site/detail/zhipu-bigmodel.html">
+<meta property="og:title" content="智谱 BigModel · Aivaro 导航">
+<meta property="og:description" content="GLM 官方平台，附杭州 Coding 减免活动">
+<meta property="og:url" content="https://aivaro.site/detail/zhipu-bigmodel.html">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/brand-icon-32.png">
+<link rel="stylesheet" href="assets/theme.css">
+<script>/* 主题初始化（渲染前执行，避免闪烁）：localStorage 偏好优先，缺省跟随系统 */
+(function(){try{var p=localStorage.getItem('aivaro-theme')||'auto';var d=p==='dark'||(p==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.theme=d?'dark':'light';document.documentElement.dataset.pref=p;}catch(e){document.documentElement.dataset.theme='light';document.documentElement.dataset.pref='auto';}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html"><span class="brand-tile"><img src="assets/brand-icon.png" alt="Aivaro 品牌图标"></span>Aivaro<small>中转站导航</small></a>
+    <nav class="seg-nav" id="segNav" aria-label="主导航">
+      <a href="index.html" data-nav="index">首页</a>
+      <a href="directory.html" data-nav="directory">目录</a>
+      <a href="free.html" data-nav="free">免费</a>
+      <a href="compare.html" data-nav="compare">比价</a>
+      <a href="about.html" data-nav="about">关于</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="search-btn" id="searchBtn" aria-label="全站搜索，快捷键 Command 加 K">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+        <span class="sb-label">搜索服务 / 模型</span><kbd>⌘K</kbd>
+      </button>
+      <button class="theme-btn" id="themeBtn" aria-label="主题切换" title="主题：跟随系统">
+        <svg class="ic-auto" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor" stroke="none"/></svg>
+        <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="打开导航菜单" aria-expanded="false" aria-controls="navSheet">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="sheet" id="navSheet" aria-label="站点导航">
+    <a href="index.html">首页 <span>›</span></a>
+    <a href="directory.html">服务目录 <span>›</span></a>
+    <a href="compare.html">价格对比 <span>›</span></a>
+    <a href="free.html">免费额度 <span>›</span></a>
+    <a href="about.html">收录规范与关于 <span>›</span></a>
+    <a href="submit.html">投稿收录 <span>›</span></a>
+    <a href="advertise.html">广告合作 <span>›</span></a>
+    <hr>
+    <div class="sheet-h">分类</div>
+    <a href="directory.html?cat=free">免费 AI API</a>
+    <a href="directory.html?cat=lowcost">低价 AI API</a>
+    <a href="directory.html?cat=claude">Claude 中转</a>
+    <a href="directory.html?cat=openai">OpenAI 中转</a>
+    <a href="directory.html?cat=gemini">Gemini 中转</a>
+    <a href="directory.html?cat=aggregator">多模型聚合</a>
+    <a href="directory.html?cat=tools">开发工具与资源</a>
+  </nav>
+</header>
+<main class="wrap" id="detailMain">
+  <p style="padding:30px 0"><a href="directory.html">← 返回服务目录</a></p>
+  <div id="detailBody"><div class="detail-h"><div class="detail-top"><span class="logo-tile has-icon" aria-hidden="true"><span class="logo-letter">智</span><img class="logo-img" src="data:image/png;base64,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" alt="" loading="lazy"></span><div class="detail-tt"><h1>智谱 BigModel</h1><p class="tag">GLM 官方平台，附杭州 Coding 减免活动</p></div></div><div class="chips" style="margin-top:12px"><span class="chip">官方平台</span><span class="chip grey">状态：官网可打开</span></div><p style="margin-top:18px"><a class="btn" href="go.html?id=zhipu-bigmodel" target="_blank" rel="noopener">访问官网 ↗</a></p><p class="leave-note">点击将离开 Aivaro，前往该服务商的官网（第三方站点）。Aivaro 与该服务无运营关系，注册与付费请在对方站点自行核对条款。</p></div><div class="metrics"><div class="m"><h4>起充金额</h4><div>待核实</div></div><div class="m"><h4>已核实最低输入价</h4><div>待核实</div></div><div class="m"><h4>服务状态</h4><div>官网可打开</div></div><div class="m"><h4>最近核实</h4><div>2026-11-11</div></div></div><section class="blk"><div class="blk-h"><h2>介绍</h2></div><p style="max-width:760px">智谱自家的大模型开放平台，GLM 系列模型官方直营。其官方文档里有一项与杭州市合作的 Coding 套餐减免活动，并写明 ZCode 新用户可领取 1 亿 Token 体验额度。</p></section><section class="blk"><div class="blk-h"><h2>价格（已核实部分）</h2><span>逐条可回官方页面复核</span></div><p>逐模型价格：<span class="unknown">待核实</span></p><p class="note">本轮核实的是其官方活动文档（套餐减免与体验额度），未逐项摘录 API 按量单价，故单价标待核实。</p></section><section class="blk"><div class="blk-h"><h2>支持模型（已核实范围）</h2></div><div class="chips" style="margin-bottom:10px"><span class="chip grey">GLM 系列</span><span class="chip grey">ZCode（官方编程工具）</span></div><p class="note" style="margin:0">覆盖厂商：智谱 GLM。以上为本站在其官方页面已核实到的标价与主打模型，全量清单以官网模型页为准。</p></section><section class="blk"><div class="blk-h"><h2>支付、额度与接入</h2></div><div class="kv"><div class="cell"><h4>支付方式</h4><div><span class="unknown">待核实</span></div></div><div class="cell"><h4>免费额度</h4><div>ZCode 新用户可领取 1 亿 Token 体验额度（官方活动文档）；另有「杭州全城 Coding 计划」购套餐减免 44%–55%（限在杭人群/企业，活动期 9 月 10 日–12 月 9 日）<span class="badge fkind">注册赠送</span></div></div><div class="cell"><h4>注册要求</h4><div>需实名认证；杭州计划另需在杭社保参保证明或学信网验证报告并通过资质审核</div></div><div class="cell"><h4>计费模式</h4><div>Coding Plan 订阅套餐＋API 按量计费；杭州计划为限时综合减免（个人季卡/年卡减免 44%/51%，企业年卡 55%）</div></div><div class="cell"><h4>API 兼容格式</h4><div><span class="unknown">待核实</span></div></div><div class="cell"><h4>模型规模</h4><div><span class="unknown">待核实</span></div></div><div class="cell"><h4>支持厂商</h4><div>智谱 GLM</div></div><div class="cell"><h4>主打模型</h4><div>GLM 系列、ZCode（官方编程工具）</div></div><div class="cell"><h4>服务状态备注</h4><div>2026-11-03 核实时官方活动文档页可正常打开</div></div></div></section><section class="blk"><div class="blk-h"><h2>值得注意的优点</h2></div><ul class="pc-list"><li>活动规则、减免比例、审核材料与退款规则全部写在官方文档里，可逐项核对 <span class="basis">（依据：官方活动文档）</span></li><li>ZCode 新用户 1 亿 Token 体验额度的领取条件写在官方页面 <span class="basis">（依据：官方活动文档）</span></li></ul></section><section class="blk"><div class="blk-h"><h2>需要留意的短板</h2></div><ul class="pc-list"><li>杭州计划的减免只面向在杭工作人员、杭州高校在校生与上城区企业，且需提交社保或学信网证明并通过审核 <span class="basis">（依据：官方活动文档）</span></li><li>杭州计划是购套餐减免而非免费额度；活动期为 9 月 10 日至 12 月 9 日，期外政策待核实 <span class="basis">（依据：本轮核实记录）</span></li></ul></section><section class="blk"><div class="blk-h"><h2>状态口径说明</h2></div><p style="max-width:760px">本站的服务状态来自<strong>核实日对其官网的人工访问结论</strong>（如「官网可打开」），不做可用性百分比探测，也不代表其 API 网关的实时可用性、模型真实性或计费准确性。部分同行导航会做无凭证自动探测并给出可用性数值，本站在没有持续探测样本之前不发布此类数字，以免给出无法负责的精度。状态如有官方公告变更，我们会在复核时更新并记入下方时间线。</p><p style="max-width:760px"><strong>「官网可打开」仅代表核实当天该官网可正常打开，不代表服务质量、稳定性或资金安全。</strong></p><div style="max-width:760px"><div class="segbar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div><div class="segbar-cap">信息完整度 2/7（已核实字段占比，非可用性探测）</div></div></section><section class="blk"><div class="blk-h"><h2>来源与核实</h2></div><div class="src-box"><div>数据来源：<a href="https://docs.bigmodel.cn/cn/coding-plan/hangzhou-rules" target="_blank" rel="noopener noreferrer">https://docs.bigmodel.cn/cn/coding-plan/hangzhou-rules</a></div><div>最近核实时间：2026-11-11（只读访问其官方页面）</div><div>本站收录日期：2026-11-03</div><div style="margin-top:6px;color:var(--ink-3)">字段标「待核实」表示本轮未在其官方页面查到，未采用任何第三方数据填充。发现信息有误，可通过官网核对后反馈给我们更正。</div></div><h3 style="font-size:15px;margin:20px 0 4px">核实记录</h3><ul class="timeline"><li><time datetime="2026-11-03">2026-11-03</time><div><span class="src-type">官方文档核实</span>本站收录，并完成官方页面核实（活动规则、体验额度、注册要求）</div></li></ul></section><section class="blk"><div class="blk-h"><h2>同类服务</h2><span>按共同模型自动匹配</span></div><div class="rel-grid"><div class="rel-card"><h3><a href="detail/555codex-xyz.html">555</a></h3><p>公开定价接口可核，在列 22 个模型</p><p>已核实最低输入价 <strong>$0.26</strong> / 1M</p><div class="why">共同点：同覆盖 国产模型 等模型家族</div></div><div class="rel-card"><h3><a href="detail/siliconflow.html">硅基流动 SiliconFlow</a></h3><p>国产开源模型推理云，人民币计价</p><div class="why">共同点：同覆盖 国产模型 等模型家族</div></div><div class="rel-card"><h3><a href="detail/api-holdai-top.html">毫秒 API</a></h3><p>公开定价接口可核，在列 703 个模型</p><div class="why">共同点：同覆盖 国产模型 等模型家族</div></div><div class="rel-card"><h3><a href="detail/jiugx-com.html">九哥API</a></h3><p>公开定价接口可核，在列 61 个模型</p><div class="why">共同点：同覆盖 国产模型 等模型家族</div></div><div class="rel-card"><h3><a href="detail/rivora-cc.html">启流AI</a></h3><p>公开定价接口可核，在列 14 个模型</p><div class="why">共同点：同覆盖 国产模型 等模型家族</div></div><div class="rel-card"><h3><a href="detail/aitokensflux-com.html">AI Tokens Flux</a></h3><p>公开定价接口可核，在列 46 个模型</p><p>已核实最低输入价 <strong>$1.35</strong> / 1M</p><div class="why">共同点：同覆盖 国产模型 等模型家族</div></div></div><p class="note">按共同覆盖的厂商与模型家族自动匹配，排列不构成推荐。</p></section></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="index.html">首页</a><a href="directory.html">服务目录</a><a href="compare.html">价格对比</a><a href="free.html">免费额度</a><a href="about.html">收录规范与关于</a><a href="submit.html">投稿收录</a><a href="advertise.html">广告合作</a><a href="privacy.html">隐私政策</a>
+    </nav>
+    <div class="sub-box" id="subBox" hidden>
+      <form id="subForm" novalidate>
+        <div class="sub-h">订阅本站更新</div>
+        <div class="sub-row">
+          <input type="email" id="subEmail" placeholder="邮箱地址" autocomplete="email" aria-label="订阅邮箱">
+          <button class="btn sm" type="submit">订阅</button>
+        </div>
+        <label class="sub-consent"><input type="checkbox" id="subConsent"> <span>我已阅读并同意<a href="privacy.html">隐私政策</a></span></label>
+        <p class="sub-msg" id="subMsg" role="status"></p>
+        <p class="sub-note">退订方式：回复任意一封订阅邮件注明「退订」，或经<a href="about.html#contact">关于页邮箱</a>联系我们删除你的邮箱。</p>
+      </form>
+    </div>
+    <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，收录并核实公开服务信息，提供服务发现、比较与官网导航。本站与本页介绍的第三方服务<strong>没有运营、代理或隶属关系</strong>；点「访问官网」将离开本站，注册、充值与使用均发生在第三方站点，请自行核对条款。</p>
+    <p class="disclaimer">本站仅提供网址信息整理与导航，不提供网络代理、跨境访问或 API 转发服务；站内所列第三方服务均由其运营者负责，本站不对其合规性、可用性与价格作保证；使用任何第三方服务前，请自行核实其资质与条款，并遵守所在地法律法规。</p>
+    <p>Aivaro 导航 · 数据核实于 2026-11-03 · 页面由 data/services.json 驱动渲染</p>
+  </div>
+</footer>
+
+<script src="assets/analytics.js"></script>
+<script src="assets/common.js"></script>
+</body>
+</html>

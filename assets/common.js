@@ -220,7 +220,7 @@ function cardHTML(svc, opts) {
   const metaInner = priceLine + topupLine + payRow;
   return '<article class="card' + (isStale(svc) ? ' stale' : '') + '">' +
     '<div class="card-top">' + logoTileHTML(svc) +
-    '<div class="card-id"><h3><a href="detail.html?id=' + encodeURIComponent(svc.id) + '">' + esc(svc.name) + '</a></h3>' +
+    '<div class="card-id"><h3><a href="detail/' + encodeURIComponent(svc.id) + '.html' + '">' + esc(svc.name) + '</a></h3>' +
     '<div class="domain">' + esc(hostOf(svc.website)) + ' · ' + esc(svc.op_type || svc.type) + '</div></div>' +
     (topupShort ? '<span class="topup">' + esc(topupShort) + '</span>' : '') + '</div>' +
     '<p class="tag">' + esc(svc.tagline) + '</p>' +
@@ -230,7 +230,7 @@ function cardHTML(svc, opts) {
     '<div class="status-block"><span class="statusline">' + statusDot(svc) + esc(svc.status) + ' · 核实于 ' + esc(svc.verified_at) + '</span>' + staleBadgeHTML(svc) +
     segbarHTML(svc) + '</div>' +
     '<div class="card-actions">' +
-      '<a class="go" href="detail.html?id=' + encodeURIComponent(svc.id) + '">详情</a>' +
+      '<a class="go" href="detail/' + encodeURIComponent(svc.id) + '.html' + '">详情</a>' +
       '<a class="go site" href="go.html?id=' + encodeURIComponent(svc.id) + '" target="_blank" rel="noopener">访问官网</a>' +
     '</div>' +
     '</article>';
@@ -466,7 +466,7 @@ function renderSearchResults(q) {
     return;
   }
   box.innerHTML = list.map((s, i) =>
-    '<a class="search-item' + (i === 0 ? ' sel' : '') + '" role="option" data-href="detail.html?id=' + encodeURIComponent(s.id) + '" href="detail.html?id=' + encodeURIComponent(s.id) + '">' +
+    '<a class="search-item' + (i === 0 ? ' sel' : '') + '" role="option" data-href="detail/' + encodeURIComponent(s.id) + '.html' + '" href="detail/' + encodeURIComponent(s.id) + '.html' + '">' +
       '<span class="si-main"><strong>' + esc(s.name) + '</strong><span>' + esc(s.tagline) + '</span></span>' +
       '<span class="si-side">' + statusDot(s) + esc(s.op_type || s.type) + '</span>' +
     '</a>').join('');

@@ -219,7 +219,7 @@
       '<td>' + esc(r.price.currency) + ' · ' + esc(r.price.unit) + '</td>' +
       '<td style="max-width:220px">' + freeLabel(r.svc) + '</td>' +
       '<td>' + esc(r.svc.verified_at) + '</td>' +
-      '<td><a href="detail.html?id=' + encodeURIComponent(r.svc.id) + '">详情</a></td>' +
+      '<td><a href="detail/' + encodeURIComponent(r.svc.id) + '.html' + '">详情</a></td>' +
       '</tr>'
     ).join('') || '<tr><td colspan="9">该模型暂无已核实的跨站价格。</td></tr>';
     document.getElementById('cmpNote').textContent =

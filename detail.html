@@ -61,7 +61,7 @@
 
 <main class="wrap" id="detailMain">
   <p style="padding:30px 0"><a href="directory.html">← 返回服务目录</a></p>
-  <div id="detailBody"><p>正在加载…</p></div>
+  <div id="detailBody"><p>正在跳转到新版详情页…如果没有自动跳转，<a href="directory.html">请返回服务目录</a>。</p></div>
 </main>
 
 <footer>
@@ -90,205 +90,36 @@
 <script src="assets/analytics.js"></script>
 <script src="assets/common.js"></script>
 <script>
+/* 详情页静态化迁移（2026-11-18）：旧地址 detail.html?id=<id> 永久跳转到新静态页
+   detail/<id>.html。先把动态 canonical 改指新静态页、再 location.replace 跳转
+   （replace 不留历史记录）；id 不在表时回目录页。本跳转壳永久保留。 */
 (async function () {
-  const data = await loadData();
-  const id = new URLSearchParams(location.search).get('id') || '';
-  const svc = data.services.find(s => s.id === id);
-  const body = document.getElementById('detailBody');
-  if (!svc) {
-    body.innerHTML = '<div class="empty">未找到该服务（id: ' + esc(id) + '）。<a href="directory.html">返回目录</a></div>';
-    return;
-  }
-  document.title = svc.name + ' · Aivaro 导航';
-
-  /* 正式站 SEO：按条目动态设置 canonical 与 og（静态写死会把全部详情页指向同一 URL，故由渲染脚本按 id 设置；
-     未找到条目时不设置 canonical） */
-  (function () {
-    var url = 'https://aivaro.site/detail.html?id=' + encodeURIComponent(svc.id);
+  var id = new URLSearchParams(location.search).get('id') || '';
+  var setCanon = function (href) {
     var canon = document.querySelector('link[rel="canonical"]');
     if (!canon) { canon = document.createElement('link'); canon.rel = 'canonical'; document.head.appendChild(canon); }
-    canon.href = url;
-    var setOg = function (prop, val) {
-      var m = document.querySelector('meta[property="' + prop + '"]');
-      if (!m) { m = document.createElement('meta'); m.setAttribute('property', prop); document.head.appendChild(m); }
-      m.setAttribute('content', val);
-    };
-    setOg('og:title', svc.name + ' · Aivaro 导航');
-    setOg('og:description', (svc.tagline || svc.intro || '').slice(0, 160));
-    setOg('og:url', url);
-    setOg('og:type', 'website');
-  })();
-
-  const kvCell = (title, inner) =>
-    '<div class="cell"><h4>' + esc(title) + '</h4><div>' + inner + '</div></div>';
-
-  /* 价格分层行（第十九轮）：锚点模型（Sonnet 5.5/4.6）价格行下注明相对官方价比例与分层；
-     异常低价（<30%）附风险提示。比例与分层由数据层 price_ratio 给出，页面只呈现 */
-  const tierLine = p => {
-    const pr = (svc.price_ratio || {})[p.model_id];
-    if (!pr) return '';
-    const pct = Math.round(pr.ratio * 100);
-    if (pr.ratio >= 1) return '<div class="tier-line">相对官方价约 ' + pct + '%</div>';
-    const tier = pr.ratio >= 0.7 ? '略低' : (pr.ratio >= 0.3 ? '明显低' : '异常低价');
-    if (tier === '异常低价')
-      return '<div class="tier-line abn">价格分层：异常低价（约官方价 ' + pct + '%）——明显低于官方价，请注意甄别来源与稳定性风险</div>';
-    return '<div class="tier-line">价格分层：' + tier + '（约官方价 ' + pct + '%）</div>';
+    canon.href = href;
   };
-  /* 分组价行（第二十二轮）：价格行按非 default 分组换算时，行旁标「分组价」并注明分组名 */
-  const groupLine = p => p.group_price
-    ? '<div class="tier-line" style="color:var(--warn)">分组价（' + esc(p.price_group || '') + ' 分组）——非默认分组价格</div>'
-    : '';
-  /* 有效价格行：invalid 行（占位倍率行换算产物，数据层已标）不展示、不参与计算；
-     全部行 invalid 时价格区走「待核实」呈现（priceBlock 的空分支＋prices_note 说明） */
-  const validPrices = (svc.prices || []).filter(p => !p.invalid);
-  const priceRows = validPrices.map(p =>
-    '<tr><td><strong>' + esc(p.model_label) + '</strong>' +
-    (p.note ? '<div style="color:var(--ink-3);font-size:12px">' + esc(p.note) + '</div>' : '') + tierLine(p) + groupLine(p) + '</td>' +
-    '<td class="price">' + fmtUsd(p.input) + '</td><td class="price">' + fmtUsd(p.output) + '</td>' +
-    '<td class="price">' + (p.cache_read != null ? fmtUsd(p.cache_read) : '—') + '</td>' +
-    '<td>' + esc(p.currency) + ' · ' + esc(p.unit) + '</td>' +
-    '<td><a href="' + esc(p.price_source_url) + '" target="_blank" rel="noopener noreferrer">数据来源</a></td></tr>'
-  ).join('');
-  const priceNotes =
-    (svc.price_consistency === 'inconsistent'
-      ? '<p class="note">价格一致性提示：其 Claude Sonnet 5.5 与 4.6 相对官方价的比例差异异常，本站已暂停其「低价」归类，待人工复核。</p>' : '') +
-    (hasAbnormalPrice(svc)
-      ? '<p class="note">异常低价提示：其 Sonnet 价格低于官方价的三成，低得异常；价格低不代表来源合规或服务稳定，请自行评估，本站不作推荐。</p>' : '') +
-    (svc.price_group_status === 'non_default' && priceRows
-      ? '<p class="note">价格分组提示：其 Sonnet 锚点价格取自非默认分组（分组价），本站已暂停其「低价」归类；价格行旁标有「分组价」，默认分组价格请以官网定价为准。</p>' : '');
-
-  const priceBlock = priceRows
-    ? '<div class="tablewrap"><table class="cmp"><thead><tr><th>模型</th><th>输入价</th><th>输出价</th><th>缓存读价</th><th>计费单位</th><th>数据来源</th></tr></thead><tbody>' + priceRows + '</tbody></table></div>'
-    : '<p>逐模型价格：<span class="unknown">待核实</span></p>' + (svc.prices_note ? '<p class="note">' + esc(svc.prices_note) + '</p>' : '');
-
-  const pcList = items => items && items.length
-    ? '<ul class="pc-list">' + items.map(x =>
-        '<li>' + esc(x.text) + ' <span class="basis">（依据：' + esc(x.basis) + '）</span></li>').join('') + '</ul>'
-    : '<p>' + UNKNOWN + '</p>';
-
-  /* 支持模型全清单（本站已核实到的范围）：标价模型 ∪ 主打模型 */
-  const pricedModels = validPrices.map(p => p.model_label);
-  const allModels = Array.from(new Set(pricedModels.concat(svc.models_highlight || [])));
-  const modelBlock =
-    '<div class="chips" style="margin-bottom:10px">' +
-    allModels.map(m => '<span class="chip grey">' + esc(m) + '</span>').join('') + '</div>' +
-    '<p class="note" style="margin:0">覆盖厂商：' + listOrUnknown(svc.vendors) + '。以上为本站在其官方页面已核实到的标价与主打模型，' +
-    (svc.model_count ? '其官方口径的模型总量为 ' + esc(svc.model_count) + '，' : '') +
-    '全量清单以官网模型页为准。</p>';
-
-  /* 核实记录时间线（逐条标来源类型。判定口径：优先按 verification_log 的 method 字段——
-     official_api=官方接口核实 / official_page=官网页面核实 / official_docs=官方文档核实；
-     无对应日志条目时按事件文本判定；纯收录动作标「本站收录」） */
-  const SRC_LABEL = { official_api: '官方接口核实', official_page: '官网页面核实', official_docs: '官方文档核实' };
-  const logsByDate = {};
-  (svc.verification_log || []).forEach(e => { if (e.checked_at) logsByDate[e.checked_at] = e.method; });
-  function srcTypeOf(h) {
-    if (logsByDate[h.date] && SRC_LABEL[logsByDate[h.date]]) return SRC_LABEL[logsByDate[h.date]];
-    if (/接口/.test(h.event)) return '官方接口核实';
-    if (/文档/.test(h.event)) return '官方文档核实';
-    if (/核实/.test(h.event)) return '官网页面核实';
-    return '本站收录';
-  }
-  const history = (svc.history && svc.history.length) ? svc.history : [{ date: svc.verified_at, event: '完成官方页面核实' }];
-  const timeline = '<ul class="timeline">' + history.slice().reverse().map(h =>
-    '<li><time datetime="' + esc(h.date) + '">' + esc(h.date) + '</time><div><span class="src-type">' + srcTypeOf(h) + '</span>' + esc(h.event) + '</div></li>').join('') + '</ul>';
-
-  /* 同类推荐：按共享厂商/模型家族计分，取 6 家（自动匹配，不构成推荐） */
-  const myFam = new Set(familiesOf(svc));
-  const myVendors = new Set(svc.vendors || []);
-  const myPriced = new Set(validPrices.map(p => p.model_id));
-  const similar = data.services
-    .filter(s => s.id !== svc.id && s.type !== '导航站')
-    .map(s => {
-      let score = 0;
-      familiesOf(s).forEach(f => { if (myFam.has(f)) score += 2; });
-      (s.vendors || []).forEach(v => { if (myVendors.has(v)) score += 1; });
-      (s.prices || []).forEach(p => { if (!p.invalid && myPriced.has(p.model_id)) score += 2; });
-      return { s, score };
-    })
-    .filter(x => x.score > 0)
-    .sort((a, b) => b.score - a.score || a.s.name.localeCompare(b.s.name, 'zh'))
-    .slice(0, 6);
-  const similarBlock = similar.length
-    ? '<div class="rel-grid">' + similar.map(x => {
-        const m = minUsdInput(x.s);
-        return '<div class="rel-card"><h3><a href="detail.html?id=' + encodeURIComponent(x.s.id) + '">' + esc(x.s.name) + '</a></h3>' +
-          '<p>' + esc(x.s.tagline) + '</p>' +
-          (m != null ? '<p>已核实最低输入价 <strong>' + fmtUsd(m) + '</strong> / 1M</p>' : '') +
-          '<div class="why">共同点：同覆盖 ' + familiesOf(x.s).filter(f => myFam.has(f)).join('、') + ' 等模型家族</div></div>';
-      }).join('') + '</div>' +
-      '<p class="note">按共同覆盖的厂商与模型家族自动匹配，排列不构成推荐。</p>'
-    : '<p>暂无可匹配的同类服务。</p>';
-
-  /* 四格指标条（区块顺序对标：页眉 → 指标条 → 价格 → 模型 → 状态 → 支付）：
-     四格均为本站真实字段——起充、已核实最低单价、服务状态、最近核实；
-     不展示运营时长与可用性百分比（无可靠来源，见「状态口径说明」）。 */
-  const minIn = minUsdInput(svc);
-  const minRec = minUsdPriceRec(svc);
-  const metrics =
-    '<div class="metrics">' +
-    '<div class="m"><h4>起充金额</h4><div>' + (svc.min_topup ? esc(svc.min_topup) : '待核实') + '</div></div>' +
-    '<div class="m"><h4>已核实最低输入价</h4><div>' + (minIn != null ? fmtUsd(minIn) + ' / 1M' + (minRec ? '（' + esc(priceModelName(minRec)) + '）' : '') : '待核实') + '</div></div>' +
-    '<div class="m"><h4>服务状态</h4><div>' + esc(svc.status) + '</div></div>' +
-    '<div class="m"><h4>最近核实</h4><div>' + esc(svc.verified_at) + '</div></div>' +
-    '</div>';
-
-  body.innerHTML =
-    '<div class="detail-h' + (isStale(svc) ? ' stale' : '') + '">' +
-      '<div class="detail-top">' + logoTileHTML(svc) +
-      '<div class="detail-tt"><h1>' + esc(svc.name) + '</h1>' +
-      '<p class="tag">' + esc(svc.tagline) + '</p></div></div>' +
-      '<div class="chips" style="margin-top:12px">' +
-        '<span class="chip">' + esc(svc.type) + '</span>' +
-        '<span class="chip grey">状态：' + esc(svc.status) + '</span>' +
-        (svc.recommended ? '<span class="chip">编辑推荐</span>' : '') +
-        staleBadgeHTML(svc) +
-      '</div>' +
-      '<p style="margin-top:18px"><a class="btn" href="go.html?id=' + encodeURIComponent(svc.id) + '" target="_blank" rel="noopener">访问官网 ↗</a></p>' +
-      '<p class="leave-note">点击将离开 Aivaro，前往该服务商的官网（第三方站点）。Aivaro 与该服务无运营关系，注册与付费请在对方站点自行核对条款。</p>' +
-    '</div>' +
-
-    metrics +
-
-    '<section class="blk"><div class="blk-h"><h2>介绍</h2></div><p style="max-width:760px">' + esc(svc.intro) + '</p></section>' +
-
-    '<section class="blk"><div class="blk-h"><h2>价格（已核实部分）</h2><span>逐条可回官方页面复核</span></div>' + priceBlock + priceNotes + '</section>' +
-
-    '<section class="blk"><div class="blk-h"><h2>支持模型（已核实范围）</h2></div>' + modelBlock + '</section>' +
-
-    '<section class="blk"><div class="blk-h"><h2>支付、额度与接入</h2></div><div class="kv">' +
-      kvCell('支付方式', listOrUnknown(svc.payments)) +
-      kvCell('免费额度', freeLabel(svc) + freeKindBadgesHTML(svc) + freeStaleTagHTML(svc)) +
-      kvCell('注册要求', svc.registration ? esc(svc.registration) : UNKNOWN) +
-      kvCell('计费模式', svc.pricing_model ? esc(svc.pricing_model) : UNKNOWN) +
-      kvCell('API 兼容格式', listOrUnknown(svc.api_formats)) +
-      kvCell('模型规模', svc.model_count ? esc(svc.model_count) : UNKNOWN) +
-      kvCell('支持厂商', listOrUnknown(svc.vendors)) +
-      kvCell('主打模型', listOrUnknown(svc.models_highlight)) +
-      kvCell('服务状态备注', svc.status_note ? esc(svc.status_note) : '—') +
-    '</div></section>' +
-
-    '<section class="blk"><div class="blk-h"><h2>值得注意的优点</h2></div>' + pcList(svc.pros) + '</section>' +
-    '<section class="blk"><div class="blk-h"><h2>需要留意的短板</h2></div>' + pcList(svc.cons) + '</section>' +
-
-    '<section class="blk"><div class="blk-h"><h2>状态口径说明</h2></div>' +
-      '<p style="max-width:760px">本站的服务状态来自<strong>核实日对其官网的人工访问结论</strong>（如「官网可打开」），' +
-      '不做可用性百分比探测，也不代表其 API 网关的实时可用性、模型真实性或计费准确性。部分同行导航会做无凭证自动探测并给出可用性数值，' +
-      '本站在没有持续探测样本之前不发布此类数字，以免给出无法负责的精度。状态如有官方公告变更，我们会在复核时更新并记入下方时间线。</p>' +
-      '<p style="max-width:760px"><strong>「官网可打开」仅代表核实当天该官网可正常打开，不代表服务质量、稳定性或资金安全。</strong></p>' +
-      '<div style="max-width:760px">' + segbarHTML(svc) + '</div></section>' +
-
-    '<section class="blk"><div class="blk-h"><h2>来源与核实</h2></div>' +
-      '<div class="src-box">' +
-      '<div>数据来源：<a href="' + esc(svc.source_url) + '" target="_blank" rel="noopener noreferrer">' + esc(svc.source_url) + '</a></div>' +
-      '<div>最近核实时间：' + esc(svc.verified_at) + '（只读访问其官方页面）</div>' +
-      '<div>本站收录日期：' + esc(svc.added_at) + '</div>' +
-      '<div style="margin-top:6px;color:var(--ink-3)">字段标「待核实」表示本轮未在其官方页面查到，未采用任何第三方数据填充。发现信息有误，可通过官网核对后反馈给我们更正。</div>' +
-      '</div>' +
-      '<h3 style="font-size:15px;margin:20px 0 4px">核实记录</h3>' + timeline +
-    '</section>' +
-
-    '<section class="blk"><div class="blk-h"><h2>同类服务</h2><span>按共同模型自动匹配</span></div>' + similarBlock + '</section>';
+  var setOg = function (prop, val) {
+    var m = document.querySelector('meta[property="' + prop + '"]');
+    if (!m) { m = document.createElement('meta'); m.setAttribute('property', prop); document.head.appendChild(m); }
+    m.setAttribute('content', val);
+  };
+  try {
+    var data = await loadData();
+    var svc = data.services.find(function (x) { return x.id === id; });
+    if (svc) {
+      var url = 'https://aivaro.site/detail/' + encodeURIComponent(svc.id) + '.html';
+      setCanon(url);
+      setOg('og:title', svc.name + ' · Aivaro 导航');
+      setOg('og:description', (svc.tagline || svc.intro || '').slice(0, 160));
+      setOg('og:url', url);
+      setOg('og:type', 'website');
+      location.replace('detail/' + encodeURIComponent(svc.id) + '.html');
+      return;
+    }
+  } catch (e) { /* 数据拉取失败时仍回目录，不留死页 */ }
+  location.replace('directory.html');
 })();
 </script>
 </body>

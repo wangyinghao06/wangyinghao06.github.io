@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
+<title>Novabridge · Aivaro 导航</title>
+<meta name="description" content="公开定价接口可核，在列 95 个模型">
+<link rel="canonical" href="https://aivaro.site/detail/novaapi-ai.html">
+<meta property="og:title" content="Novabridge · Aivaro 导航">
+<meta property="og:description" content="公开定价接口可核，在列 95 个模型">
+<meta property="og:url" content="https://aivaro.site/detail/novaapi-ai.html">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/brand-icon-32.png">
+<link rel="stylesheet" href="assets/theme.css">
+<script>/* 主题初始化（渲染前执行，避免闪烁）：localStorage 偏好优先，缺省跟随系统 */
+(function(){try{var p=localStorage.getItem('aivaro-theme')||'auto';var d=p==='dark'||(p==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.theme=d?'dark':'light';document.documentElement.dataset.pref=p;}catch(e){document.documentElement.dataset.theme='light';document.documentElement.dataset.pref='auto';}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html"><span class="brand-tile"><img src="assets/brand-icon.png" alt="Aivaro 品牌图标"></span>Aivaro<small>中转站导航</small></a>
+    <nav class="seg-nav" id="segNav" aria-label="主导航">
+      <a href="index.html" data-nav="index">首页</a>
+      <a href="directory.html" data-nav="directory">目录</a>
+      <a href="free.html" data-nav="free">免费</a>
+      <a href="compare.html" data-nav="compare">比价</a>
+      <a href="about.html" data-nav="about">关于</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="search-btn" id="searchBtn" aria-label="全站搜索，快捷键 Command 加 K">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+        <span class="sb-label">搜索服务 / 模型</span><kbd>⌘K</kbd>
+      </button>
+      <button class="theme-btn" id="themeBtn" aria-label="主题切换" title="主题：跟随系统">
+        <svg class="ic-auto" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor" stroke="none"/></svg>
+        <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="打开导航菜单" aria-expanded="false" aria-controls="navSheet">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="sheet" id="navSheet" aria-label="站点导航">
+    <a href="index.html">首页 <span>›</span></a>
+    <a href="directory.html">服务目录 <span>›</span></a>
+    <a href="compare.html">价格对比 <span>›</span></a>
+    <a href="free.html">免费额度 <span>›</span></a>
+    <a href="about.html">收录规范与关于 <span>›</span></a>
+    <a href="submit.html">投稿收录 <span>›</span></a>
+    <a href="advertise.html">广告合作 <span>›</span></a>
+    <hr>
+    <div class="sheet-h">分类</div>
+    <a href="directory.html?cat=free">免费 AI API</a>
+    <a href="directory.html?cat=lowcost">低价 AI API</a>
+    <a href="directory.html?cat=claude">Claude 中转</a>
+    <a href="directory.html?cat=openai">OpenAI 中转</a>
+    <a href="directory.html?cat=gemini">Gemini 中转</a>
+    <a href="directory.html?cat=aggregator">多模型聚合</a>
+    <a href="directory.html?cat=tools">开发工具与资源</a>
+  </nav>
+</header>
+<main class="wrap" id="detailMain">
+  <p style="padding:30px 0"><a href="directory.html">← 返回服务目录</a></p>
+  <div id="detailBody"><div class="detail-h"><div class="detail-top"><span class="logo-tile has-icon" aria-hidden="true"><span class="logo-letter">N</span><img class="logo-img" src="data:image/png;base64,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" alt="" loading="lazy"></span><div class="detail-tt"><h1>Novabridge</h1><p class="tag">公开定价接口可核，在列 95 个模型</p></div></div><div class="chips" style="margin-top:12px"><span class="chip">中转/聚合</span><span class="chip grey">状态：官网可打开</span></div><p style="margin-top:18px"><a class="btn" href="go.html?id=novaapi-ai" target="_blank" rel="noopener">访问官网 ↗</a></p><p class="leave-note">点击将离开 Aivaro，前往该服务商的官网（第三方站点）。Aivaro 与该服务无运营关系，注册与付费请在对方站点自行核对条款。</p></div><div class="metrics"><div class="m"><h4>起充金额</h4><div>待核实</div></div><div class="m"><h4>已核实最低输入价</h4><div>$3 / 1M（Claude Sonnet 4.6）</div></div><div class="m"><h4>服务状态</h4><div>官网可打开</div></div><div class="m"><h4>最近核实</h4><div>2026-11-11</div></div></div><section class="blk"><div class="blk-h"><h2>介绍</h2></div><p style="max-width:760px">AI API 中转/聚合服务。本站于 2026-11-03 从其官网公开定价接口逐项核实：在列模型 95 个，覆盖 OpenAI、MiniMax、Anthropic、Google、智谱 GLM、Moonshot。其余字段（支付、注册、起充）能在官网公开页面核实到的才写入，核实不到的标待核实。</p></section><section class="blk"><div class="blk-h"><h2>价格（已核实部分）</h2><span>逐条可回官方页面复核</span></div><div class="tablewrap"><table class="cmp"><thead><tr><th>模型</th><th>输入价</th><th>输出价</th><th>缓存读价</th><th>计费单位</th><th>数据来源</th></tr></thead><tbody><tr><td><strong>Claude Sonnet 4.6</strong><div style="color:var(--ink-3);font-size:12px">官网公开定价接口倍率换算（输入价 = 模型倍率×2×分组倍率，输出 = 输入×补全倍率；按 default 分组倍率 1.0 换算）</div><div class="tier-line">相对官方价约 100%</div></td><td class="price">$3</td><td class="price">$15</td><td class="price">—</td><td>USD · 每 1M tokens</td><td><a href="https://novaapi.ai/api/pricing" target="_blank" rel="noopener noreferrer">数据来源</a></td></tr></tbody></table></div></section><section class="blk"><div class="blk-h"><h2>支持模型（已核实范围）</h2></div><div class="chips" style="margin-bottom:10px"><span class="chip grey">Claude Sonnet 4.6</span><span class="chip grey">claude-opus-4-6-high</span><span class="chip grey">gpt-5-codex</span><span class="chip grey">gemini-3.5-flash</span><span class="chip grey">glm-4.7</span><span class="chip grey">kimi-k3</span></div><p class="note" style="margin:0">覆盖厂商：OpenAI、MiniMax、Anthropic、Google、智谱 GLM、Moonshot。以上为本站在其官方页面已核实到的标价与主打模型，其官方口径的模型总量为 95（定价接口在列），全量清单以官网模型页为准。</p></section><section class="blk"><div class="blk-h"><h2>支付、额度与接入</h2></div><div class="kv"><div class="cell"><h4>支付方式</h4><div><span class="unknown">待核实</span></div></div><div class="cell"><h4>免费额度</h4><div><span class="unknown">待核实</span></div></div><div class="cell"><h4>注册要求</h4><div><span class="unknown">待核实</span></div></div><div class="cell"><h4>计费模式</h4><div>按量付费（倍率计价，官网公开定价接口公示）</div></div><div class="cell"><h4>API 兼容格式</h4><div>OpenAI 兼容</div></div><div class="cell"><h4>模型规模</h4><div>95（定价接口在列）</div></div><div class="cell"><h4>支持厂商</h4><div>OpenAI、MiniMax、Anthropic、Google、智谱 GLM、Moonshot</div></div><div class="cell"><h4>主打模型</h4><div>claude-opus-4-6-high、gpt-5-codex、gemini-3.5-flash、glm-4.7、kimi-k3</div></div><div class="cell"><h4>服务状态备注</h4><div>2026-11-03 核实时官网与公开定价接口均可达（接口 HTTP 200）</div></div></div></section><section class="blk"><div class="blk-h"><h2>值得注意的优点</h2></div><ul class="pc-list"><li>价格可从其官网公开定价接口逐项核对（在列 95 个模型） <span class="basis">（依据：官方定价接口）</span></li></ul></section><section class="blk"><div class="blk-h"><h2>需要留意的短板</h2></div><ul class="pc-list"><li>支付方式、起充与注册要求等字段仅部分核实，未核实到的已标待核实 <span class="basis">（依据：本轮核实记录）</span></li></ul></section><section class="blk"><div class="blk-h"><h2>状态口径说明</h2></div><p style="max-width:760px">本站的服务状态来自<strong>核实日对其官网的人工访问结论</strong>（如「官网可打开」），不做可用性百分比探测，也不代表其 API 网关的实时可用性、模型真实性或计费准确性。部分同行导航会做无凭证自动探测并给出可用性数值，本站在没有持续探测样本之前不发布此类数字，以免给出无法负责的精度。状态如有官方公告变更，我们会在复核时更新并记入下方时间线。</p><p style="max-width:760px"><strong>「官网可打开」仅代表核实当天该官网可正常打开，不代表服务质量、稳定性或资金安全。</strong></p><div style="max-width:760px"><div class="segbar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div><div class="segbar-cap">信息完整度 3/7（已核实字段占比，非可用性探测）</div></div></section><section class="blk"><div class="blk-h"><h2>来源与核实</h2></div><div class="src-box"><div>数据来源：<a href="https://novaapi.ai/api/pricing" target="_blank" rel="noopener noreferrer">https://novaapi.ai/api/pricing</a></div><div>最近核实时间：2026-11-11（只读访问其官方页面）</div><div>本站收录日期：2026-11-03</div><div style="margin-top:6px;color:var(--ink-3)">字段标「待核实」表示本轮未在其官方页面查到，未采用任何第三方数据填充。发现信息有误，可通过官网核对后反馈给我们更正。</div></div><h3 style="font-size:15px;margin:20px 0 4px">核实记录</h3><ul class="timeline"><li><time datetime="2026-11-03">2026-11-03</time><div><span class="src-type">官方接口核实</span>本站收录，并完成官方公开接口核实（价格、模型、接口格式）</div></li></ul></section><section class="blk"><div class="blk-h"><h2>同类服务</h2><span>按共同模型自动匹配</span></div><div class="rel-grid"><div class="rel-card"><h3><a href="detail/aiberm-com.html">AIBerm</a></h3><p>公开定价接口可核，在列 155 个模型</p><p>已核实最低输入价 <strong>$0.12</strong> / 1M</p><div class="why">共同点：同覆盖 Claude、GPT、Gemini、国产模型 等模型家族</div></div><div class="rel-card"><h3><a href="detail/router-aionclaw-ai.html">AionRouter</a></h3><p>公开定价接口可核，在列 152 个模型</p><p>已核实最低输入价 <strong>$3</strong> / 1M</p><div class="why">共同点：同覆盖 Claude、GPT、Gemini、国产模型 等模型家族</div></div><div class="rel-card"><h3><a href="detail/api-xty-app.html">api.xty.app</a></h3><p>公开定价接口可核，在列 439 个模型</p><p>已核实最低输入价 <strong>$0.3</strong> / 1M</p><div class="why">共同点：同覆盖 Claude、GPT、Gemini、国产模型 等模型家族</div></div><div class="rel-card"><h3><a href="detail/clawrouter-com.html">clawrouter</a></h3><p>公开定价接口可核，在列 76 个模型</p><p>已核实最低输入价 <strong>$0.12</strong> / 1M</p><div class="why">共同点：同覆盖 Claude、GPT、Gemini、国产模型 等模型家族</div></div><div class="rel-card"><h3><a href="detail/crazyrouter-com.html">Crazyrouter</a></h3><p>公开定价接口可核，在列 167 个模型</p><p>已核实最低输入价 <strong>$0.2985</strong> / 1M</p><div class="why">共同点：同覆盖 Claude、GPT、Gemini、国产模型 等模型家族</div></div><div class="rel-card"><h3><a href="detail/cn-chrouter-com.html">QUNL API</a></h3><p>公开定价接口可核，在列 168 个模型</p><p>已核实最低输入价 <strong>$1.176</strong> / 1M</p><div class="why">共同点：同覆盖 Claude、GPT、Gemini、国产模型 等模型家族</div></div></div><p class="note">按共同覆盖的厂商与模型家族自动匹配，排列不构成推荐。</p></section></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="index.html">首页</a><a href="directory.html">服务目录</a><a href="compare.html">价格对比</a><a href="free.html">免费额度</a><a href="about.html">收录规范与关于</a><a href="submit.html">投稿收录</a><a href="advertise.html">广告合作</a><a href="privacy.html">隐私政策</a>
+    </nav>
+    <div class="sub-box" id="subBox" hidden>
+      <form id="subForm" novalidate>
+        <div class="sub-h">订阅本站更新</div>
+        <div class="sub-row">
+          <input type="email" id="subEmail" placeholder="邮箱地址" autocomplete="email" aria-label="订阅邮箱">
+          <button class="btn sm" type="submit">订阅</button>
+        </div>
+        <label class="sub-consent"><input type="checkbox" id="subConsent"> <span>我已阅读并同意<a href="privacy.html">隐私政策</a></span></label>
+        <p class="sub-msg" id="subMsg" role="status"></p>
+        <p class="sub-note">退订方式：回复任意一封订阅邮件注明「退订」，或经<a href="about.html#contact">关于页邮箱</a>联系我们删除你的邮箱。</p>
+      </form>
+    </div>
+    <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，收录并核实公开服务信息，提供服务发现、比较与官网导航。本站与本页介绍的第三方服务<strong>没有运营、代理或隶属关系</strong>；点「访问官网」将离开本站，注册、充值与使用均发生在第三方站点，请自行核对条款。</p>
+    <p class="disclaimer">本站仅提供网址信息整理与导航，不提供网络代理、跨境访问或 API 转发服务；站内所列第三方服务均由其运营者负责，本站不对其合规性、可用性与价格作保证；使用任何第三方服务前，请自行核实其资质与条款，并遵守所在地法律法规。</p>
+    <p>Aivaro 导航 · 数据核实于 2026-11-03 · 页面由 data/services.json 驱动渲染</p>
+  </div>
+</footer>
+
+<script src="assets/analytics.js"></script>
+<script src="assets/common.js"></script>
+</body>
+</html>
